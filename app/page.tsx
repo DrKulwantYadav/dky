@@ -1,118 +1,54 @@
-const services = [
-  { tag: "01", title: "Diabetes & metabolic health", text: "Personalised care for type 2 diabetes, obesity, metabolic syndrome and long-term lifestyle risk." },
-  { tag: "02", title: "Blood pressure & heart health", text: "Hypertension management, cardiovascular risk review, ECG and echocardiography-guided evaluation." },
-  { tag: "03", title: "Fatty liver & digestive care", text: "Evidence-led assessment for fatty liver disease (MASLD), indigestion and gastrointestinal concerns." },
-  { tag: "04", title: "Kidney health", text: "Thoughtful evaluation and ongoing care for acute and chronic kidney-related conditions." },
-  { tag: "05", title: "Headache, epilepsy & sleep", text: "Integrated care for recurring headaches, seizures, sleep concerns and common mental health conditions." },
-  { tag: "06", title: "Infections & respiratory illness", text: "Diagnosis and treatment of fevers, complex infections, respiratory infections and asthma." },
-];
+import type { Metadata } from "next";
+import ConditionCarousel from "./ConditionCarousel";
+import { pageMetadata } from "./seo";
+import SiteFooter from "./SiteFooter";
 
-const credentials = [
-  ["DNB", "General Medicine", "NBEMS, New Delhi"],
-  ["FRCEM", "Primary", "Royal College of Emergency Medicine, UK · 2019"],
-  ["DCMH", "Community Mental Health", "NIMHANS, Bengaluru · 2018"],
-  ["MBBS", "Medicine & Surgery", "U.P. University of Medical Sciences · 2008"],
+export const metadata: Metadata = pageMetadata({
+  title: "Internal Medicine Doctor in Bhiwadi",
+  description: "Consult Dr. Kulwant Yadav in Bhiwadi for adult Internal Medicine care, diabetes, hypertension, fatty liver, kidney, respiratory and complex health concerns.",
+  path: "/",
+});
+
+const services = ["Internal medicine consultation", "Chronic disease management", "Diabetes and metabolic assessment", "Medical weight-management consultation", "Preventive health evaluation", "ECG and echocardiography guidance*", "Follow-up and report review"];
+const faqs = [
+  ["What conditions does an internal medicine doctor treat?", "An internal medicine doctor provides comprehensive adult care, including diagnosis and management of diabetes, blood pressure, infections, respiratory, digestive, kidney, neurological and multi-system conditions."],
+  ["Do I need an appointment?", "Appointments are recommended. Same-day availability and booking details should be confirmed directly with the clinic."],
+  ["What should I bring to my consultation?", "Bring a list of medicines, previous prescriptions, recent test reports, allergy information and a short note of your symptoms and questions."],
+  ["Can I consult for diabetes and high blood pressure together?", "Yes. These conditions often share metabolic, heart and kidney risks, so assessing them together can support a more coordinated plan."],
+  ["Does Dr. Yadav review previous test reports?", "Previous reports are useful and can be reviewed as part of a consultation or planned follow-up."],
+  ["Is online consultation available?", "Online consultation availability has not yet been confirmed. Please check with the clinic when verified contact details are published."],
 ];
 
 export default function Home() {
-  return (
-    <main>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Dr. Kulwant Yadav, home">
-          <span className="brand-mark">KY</span>
-          <span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#about">About</a><a href="#care">Conditions</a><a href="#credentials">Credentials</a><a href="#research">Research</a>
-        </nav>
-        <a className="header-cta" href="#visit">Plan your visit <span>↗</span></a>
-      </header>
+  return <main>
+    <div className="info-strip"><span>Gopinath Hospital, Bhiwadi · Call or WhatsApp +91 92057 75932</span><strong>Medical emergency? Visit the nearest emergency department.</strong></div>
+    <header className="site-header">
+      <a className="brand" href="#home"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
+      <nav aria-label="Primary navigation"><a href="#home">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/about-dr-kulwant-yadav#research">Research</a><a href="/health-library">Health Library</a><a href="/clinic-bhiwadi">Contact</a></nav>
+      <div className="header-actions"><a className="call-link" href="tel:+919205775932">☎ Call clinic</a><a className="header-cta" href="/book-appointment">Book appointment</a></div>
+    </header>
 
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <p className="eyebrow"><span /> Internal medicine · Bhiwadi</p>
-          <h1>Medicine that sees<br /><em>the whole person.</em></h1>
-          <p className="hero-lead">Clear answers, careful listening and evidence-based care for complex and everyday health concerns.</p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#care">Explore areas of care <span>→</span></a>
-            <a className="text-link" href="#about">Meet Dr. Yadav <span>↓</span></a>
-          </div>
-          <div className="trust-row" aria-label="Qualifications and certifications">
-            <div><strong>MBBS · DNB</strong><span>General Medicine</span></div>
-            <div><strong>FRCEM (Primary)</strong><span>Emergency Medicine, UK</span></div>
-            <div><strong>BLS · ACLS</strong><span>AHA Certified</span></div>
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="portrait-frame"><img src="/dr-kulwant-yadav-portrait.png" alt="Dr. Kulwant Yadav, Consultant in Internal Medicine" /></div>
-          <div className="availability-card"><span className="pulse" /><p><strong>Care in Bhiwadi</strong><small>Adult medicine & chronic disease care</small></p></div>
-          <div className="hero-stamp" aria-hidden="true">INTERNAL<br />MEDICINE</div>
-        </div>
-      </section>
+    <section className="hero" id="home">
+      <div className="hero-copy"><p className="eyebrow"><span/> Adult medical care in Bhiwadi</p><h1 className="home-hero-title"><em>Internal Medicine Doctor</em> and Consultant Physician in Bhiwadi</h1><p className="hero-lead">Evidence-based medical care for adults with diabetes, high blood pressure, fatty liver, metabolic conditions, respiratory illness and complex health concerns.</p><div className="hero-actions refined-actions"><a className="primary-button" href="/book-appointment">Book an appointment <span>→</span></a><a className="compact-action" href="tel:+919205775932"><b>☎</b><span><strong>Call clinic</strong><small>+91 92057 75932</small></span></a><a className="compact-action" href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer"><b>⌖</b><span><strong>Get directions</strong><small>Gopinath Hospital</small></span></a></div><p className="credential-line">MBBS · DNB General Medicine · FRCEM (Primary) · Diploma in Community Mental Health</p></div>
+      <div className="hero-visual"><div className="portrait-frame"><img src="/dr-kulwant-yadav-portrait.png" alt="Dr. Kulwant Yadav, Internal Medicine doctor in Bhiwadi"/></div><div className="availability-card"><span className="pulse"/><p><strong>Comprehensive adult care</strong><small>Clear assessment · Practical treatment · Follow-up</small></p></div></div>
+    </section>
 
-      <section className="intro section" id="about">
-        <div className="section-label"><span>01</span> Meet your physician</div>
-        <div className="intro-grid">
-          <h2>Clinical rigour.<br /><em>Human understanding.</em></h2>
-          <div className="intro-copy">
-            <p className="large-copy">Dr. Kulwant Yadav is a Consultant in Internal Medicine focused on thoughtful, patient-centred care across general medicine, critical care and emergency management.</p>
-            <p>His work reflects the health needs of Bhiwadi and South Haryana—from diabetes, blood pressure and fatty liver to infections, sleep concerns and complex multi-system conditions. Every plan begins with understanding the person, not only the report.</p>
-            <div className="principles"><span><i>✓</i> Evidence-led decisions</span><span><i>✓</i> Clear, practical explanations</span><span><i>✓</i> Whole-person care</span></div>
-          </div>
-        </div>
-      </section>
+    <section className="patient-trust" aria-label="Verified professional highlights"><span>Consultant in Internal Medicine</span><span>DNB General Medicine</span><span>Emergency & critical-care experience</span><span>BLS & ACLS certified</span><span>Research & peer-reviewed publications</span></section>
 
-      <section className="care section" id="care">
-        <div className="section-top">
-          <div><div className="section-label light"><span>02</span> Areas of care</div><h2>Care for today.<br /><em>Health for the long term.</em></h2></div>
-          <p>Comprehensive adult medicine—from prevention and diagnosis to coordinated long-term management.</p>
-        </div>
-        <div className="service-grid">
-          {services.map((service) => <article className="service-card" key={service.tag}><span>{service.tag}</span><h3>{service.title}</h3><p>{service.text}</p><a href="#visit" aria-label={`Learn more about ${service.title}`}>Learn more <b>↗</b></a></article>)}
-        </div>
-        <div className="care-note"><strong>Also available</strong><p>Preventive health & metabolic screening · Medical weight management · Lifestyle and sleep counselling · Critical care & emergency resuscitation</p></div>
-      </section>
+    <section className="section condition-section" id="conditions"><div className="section-top light-head"><h2>Common concerns treated with a <em>whole-person view.</em></h2><p>Explore frequently discussed concerns with clear patient guides. Use the arrows to browse, or visit the complete Conditions page.</p></div><ConditionCarousel/><a className="view-all-conditions" href="/conditions">View all conditions <span>→</span></a></section>
 
-      <section className="approach section">
-        <div className="approach-image"><img src="/dr-kulwant-yadav-clinic.png" alt="Dr. Kulwant Yadav in his clinic" /></div>
-        <div className="approach-copy">
-          <div className="section-label"><span>03</span> The care experience</div>
-          <h2>Listen closely.<br /><em>Look deeper.</em></h2>
-          <p>Good medicine is not rushed. Dr. Yadav brings together your symptoms, history, lifestyle and investigations to create a plan that makes sense for your life.</p>
-          <ol><li><span>1</span><div><strong>Understand the full picture</strong><p>A detailed conversation about what you are feeling and what matters to you.</p></div></li><li><span>2</span><div><strong>Explain with clarity</strong><p>Plain-language guidance so you can make informed decisions with confidence.</p></div></li><li><span>3</span><div><strong>Plan for lasting health</strong><p>Practical treatment, prevention and follow-up shaped around your needs.</p></div></li></ol>
-        </div>
-      </section>
+    <section className="ckm section"><div><div className="section-label light"><span>02</span> Connected health</div><h2>When Diabetes, Blood Pressure, Weight, Liver, Heart and Kidney Health Are Connected</h2></div><div className="ckm-copy"><p className="large-copy">These conditions often influence one another. Treating only one test result may miss the wider pattern.</p><p>Cardiovascular–kidney–metabolic health describes the close relationship between metabolism, the heart and the kidneys. A comprehensive assessment brings together blood sugar, blood pressure, weight, liver health, kidney function, medicines and lifestyle.</p><ul><li>Identify shared risks rather than treating each condition in isolation</li><li>Create coordinated, practical treatment priorities</li><li>Monitor how improvement in one area affects another</li><li>Arrange referral to a cardiologist, nephrologist or another specialist when appropriate</li></ul></div></section>
 
-      <section className="credentials section" id="credentials">
-        <div className="section-label"><span>04</span> Education & credentials</div>
-        <div className="credentials-head"><h2>Trained to handle<br /><em>the complex.</em></h2><p>Rigorous medical education, international emergency medicine training and continuing development in holistic patient care.</p></div>
-        <div className="credential-list">{credentials.map(([abbr, title, place]) => <div className="credential" key={abbr}><b>{abbr}</b><strong>{title}</strong><span>{place}</span></div>)}</div>
-        <div className="cert-bar"><span>Advanced life support</span><strong>American Heart Association certified BLS & ACLS provider</strong><small>Max Institute of Excellence, New Delhi</small></div>
-      </section>
+    <section className="section services-section" id="services"><div className="section-label"><span>03</span> Services & diagnostics</div><div className="section-top light-head"><h2>Useful care, <em>clearly coordinated.</em></h2><p>Consultation and follow-up services designed around adult medical needs.</p></div><div className="service-pills">{services.map((s,i)=><div key={s}><span>0{i+1}</span><strong>{s}</strong></div>)}</div><p className="verification-note">* Direct availability, equipment location and reporting arrangements for ECG and echocardiography must be confirmed before booking.</p><a className="text-link" href="/services">Explore all services →</a></section>
 
-      <section className="research section" id="research">
-        <div className="research-intro"><div className="section-label light"><span>05</span> Research & scholarship</div><h2>Care informed by<br /><em>curiosity.</em></h2><p>Active clinical research and peer-reviewed work in metabolic disease, cardiovascular health and critical care.</p></div>
-        <div className="research-list">
-          <article><span>Ongoing multicentre study</span><h3>Real-world effectiveness of Saroglitazar in women with MASLD</h3><p>Observational research on liver fat and fibrosis outcomes in real clinical practice.</p></article>
-          <article><span>Peer-reviewed · 2025</span><h3>Chawla’s Modified Griggs Percutaneous Tracheostomy</h3><p>A safe, cost-effective alternative for resource-limited intensive care units.</p></article>
-          <article><span>DNB thesis</span><h3>Echocardiographic changes in type 2 diabetes</h3><p>Exploring BMI, waist–hip ratio and structural heart changes in metabolic disease.</p></article>
-        </div>
-      </section>
+    <section className="about-credentials section" id="about"><div className="approach"><div className="approach-image"><img src="/dr-kulwant-yadav-clinic.png" alt="Dr. Kulwant Yadav in his consultation room"/></div><div className="approach-copy"><div className="section-label"><span>04</span> About Dr. Yadav</div><h2>Careful medicine for <em>complex health.</em></h2><p>Dr. Kulwant Yadav is a Consultant in Internal Medicine serving adults in Bhiwadi. His background spans general medicine, emergency care and critical-care management, with a clinical interest in metabolic, cardiovascular, liver and interconnected chronic conditions.</p><p>His qualifications include MBBS, DNB General Medicine, FRCEM (Primary) and a Diploma in Community Mental Health from NIMHANS. Qualification designations should be checked against original certificates before public launch.</p><a className="text-link" href="/about-dr-kulwant-yadav">View complete profile →</a></div><div className="credentials credentials-inline" id="credentials"><div className="credentials-inline-head"><h3>Education & credentials</h3><p>Formal qualifications supporting a broad internal-medicine practice.</p></div><div className="credential-list"><div className="credential"><b>DNB</b><span><strong>General Medicine</strong><small>NBEMS, New Delhi</small></span></div><div className="credential"><b>FRCEM</b><span><strong>Primary examination</strong><small>Royal College of Emergency Medicine, UK · 2019</small></span></div><div className="credential"><b>DCMH</b><span><strong>Community Mental Health</strong><small>NIMHANS, Bengaluru · 2018</small></span></div><div className="credential"><b>MBBS</b><span><strong>Medicine & Surgery</strong><small>U.P. University of Medical Sciences · 2008</small></span></div></div></div></div></section>
 
-      <section className="visit section" id="visit">
-        <p className="eyebrow"><span /> Your health deserves time and attention</p>
-        <h2>Start with a<br /><em>clear conversation.</em></h2>
-        <p>Consultations for adults in Bhiwadi, with a focus on careful diagnosis, understandable guidance and long-term wellbeing.</p>
-        <a className="primary-button" href="#care">Review areas of care <span>→</span></a>
-        <small>For urgent or life-threatening symptoms, please contact local emergency services immediately.</small>
-      </section>
+    <section className="care-process section"><div className="section-label light"><span>06</span> Care approach</div><h2>From concern to a practical plan.</h2><p className="care-process-note">Treatment decisions are personalised according to symptoms, examination findings, medical history and investigation results.</p><div className="process-grid">{[["01","Listen and assess"],["02","Investigate appropriately"],["03","Create a practical treatment plan"],["04","Monitor and modify"]].map(([n,t])=><div key={n}><span>{n}</span><strong>{t}</strong><i>↓</i></div>)}</div></section>
 
-      <footer>
-        <a className="brand footer-brand" href="#top"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
-        <p>Patient-centred adult medicine in Bhiwadi, Rajasthan.</p>
-        <div><a href="#about">About</a><a href="#care">Conditions</a><a href="#credentials">Credentials</a><a href="#research">Research</a></div>
-        <small>© {new Date().getFullYear()} Dr. Kulwant Yadav. Medical information on this website is educational and does not replace a consultation.</small>
-      </footer>
-    </main>
-  );
+    <section className="faq section" id="faq"><div className="section-label"><span>09</span> Frequently asked questions</div><div className="faq-grid"><h2>Useful answers before your visit.</h2><div>{faqs.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></div></section>
+
+    <section className="contact section" id="contact"><div className="section-label light"><span>10</span> Clinic information</div><div className="contact-grid"><div><h2>Consultations at <em>Gopinath Hospital.</em></h2><p>Dr. Kulwant Yadav serves as Honorary Consultant in Internal Medicine, expanding access to chronic-disease care and preventive community health initiatives in Bhiwadi.</p><div className="social-links"><a className="clinic-instagram" href="https://www.instagram.com/drkulwantyadavmedicine?igsh=MTh6cjJvMWV5NGZvOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a><a className="clinic-youtube" href="https://youtube.com/@medicinesquarebydrkulwant?si=Rn9kcmv7AeleTNkF" target="_blank" rel="noopener noreferrer">YouTube</a><a className="clinic-facebook" href="https://www.facebook.com/share/1EDnNWKTW1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a><a className="clinic-google" href="https://share.google/NRSnun2Z3rW8XpbU5" target="_blank" rel="noopener noreferrer">Google profile</a></div></div><div className="contact-card"><span>Clinic</span><strong>Gopinath Hospital</strong><span>Address</span><strong>H-226, Industrial Area, Bhiwadi – 301019, Alwar, Rajasthan</strong><span>Landmark</span><strong>Near Ramphal Cinema</strong><span>Phone & WhatsApp</span><strong><a href="tel:+919205775932">+91 92057 75932</a></strong><span>Directions</span><strong><a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a></strong></div></div><div className="contact-appointment" id="appointment"><div className="contact-appointment-heading"><p>Request a consultation or contact the clinic for appointment assistance.</p></div><div className="appointment-options"><a className="book-option" href="/book-appointment"><span>01</span><strong>Request a consultation</strong><small>Choose a preferred date and time</small><b>→</b></a><a href="tel:+919205775932"><span>02</span><strong>Call the clinic</strong><small>+91 92057 75932</small><b>☎</b></a><a href="https://wa.me/919205775932" target="_blank" rel="noopener noreferrer"><span>03</span><strong>Message on WhatsApp</strong><small>Ask about appointments and availability</small><b>↗</b></a><a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer"><span>04</span><strong>Get directions</strong><small>Gopinath Hospital, Bhiwadi</small><b>⌖</b></a></div><small className="emergency-note">For urgent or life-threatening symptoms, visit the nearest emergency department immediately.</small></div></section>
+
+    <SiteFooter />
+  </main>;
 }
