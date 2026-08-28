@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/conditions`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/services`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/health-library`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/world-heart-day-free-ecg-camp`, changeFrequency: "yearly", priority: 0.85 },
   ];
 
   const conditionPages: MetadataRoute.Sitemap = Object.keys(conditionProfiles).map((slug) => ({
