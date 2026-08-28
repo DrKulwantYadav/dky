@@ -1,0 +1,540 @@
+[1mdiff --git a/app/layout.tsx b/app/layout.tsx[m
+[1mindex b783288..66d2012 100644[m
+[1m--- a/app/layout.tsx[m
+[1m+++ b/app/layout.tsx[m
+[36m@@ -2,6 +2,8 @@[m [mimport type { Metadata } from "next";[m
+ import { Source_Sans_3, Source_Serif_4 } from "next/font/google";[m
+ import "./globals.css";[m
+ import FloatingWhatsApp from "./FloatingWhatsApp";[m
+[32m+[m[32mimport { GoogleAnalytics } from '@next/third-parties/google';[m
+[32m+[m
+ [m
+ const display = Source_Serif_4({ variable: "--font-display", subsets: ["latin"], weight: ["500", "600"], style: ["normal"] });[m
+ const sans = Source_Sans_3({ variable: "--font-sans", subsets: ["latin"], weight: ["400", "500", "600", "700"] });[m
+[36m@@ -20,5 +22,5 @@[m [mexport const metadata: Metadata = {[m
+ [m
+ export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {[m
+   const schema = { "@context": "https://schema.org", "@type": "Physician", name: "Dr. Kulwant Yadav", medicalSpecialty: "Internal Medicine", description: "Honorary Consultant in Internal Medicine at Gopinath Hospital, Bhiwadi.", telephone: "+91-92057-75932", address: { "@type": "PostalAddress", streetAddress: "H-226, Industrial Area, Near Ramphal Cinema", addressLocality: "Bhiwadi", postalCode: "301019", addressRegion: "Rajasthan", addressCountry: "IN" }, hasMap: "https://maps.app.goo.gl/W9QHHQxRkA5bGasi7", sameAs: ["https://www.instagram.com/drkulwantyadavmedicine", "https://youtube.com/@medicinesquarebydrkulwant", "https://www.facebook.com/share/1EDnNWKTW1/", "https://share.google/NRSnun2Z3rW8XpbU5"], areaServed: [{ "@type": "City", name: "Bhiwadi" }, { "@type": "AdministrativeArea", name: "Alwar" }], knowsAbout: ["Diabetes", "Hypertension", "Fatty liver disease", "Chronic kidney disease", "Respiratory infections", "Metabolic syndrome"] };[m
+[31m-  return <html lang="en-IN"><body className={`${display.variable} ${sans.variable}`}><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}<details className="mobile-menu"><summary aria-label="Open website menu"><span>Menu</span><i aria-hidden="true"/></summary><nav aria-label="Mobile navigation"><a href="/">Home</a><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a><a href="/conditions">Conditions treated</a><a href="/services">Services</a><a href="/health-library">Health library</a><a href="/clinic-bhiwadi">Clinic & directions</a></nav></details><FloatingWhatsApp/><nav className="mobile-action-bar" aria-label="Quick contact actions"><a href="tel:+919205775932"><span className="mobile-icon-crop call-crop"><img src="/call-contact-icon.webp" alt="" aria-hidden="true"/></span><span className="action-label">Call</span></a><a href="https://wa.me/919205775932" target="_blank" rel="noopener noreferrer"><span className="mobile-icon-crop whatsapp-crop"><img src="/whatsapp-contact-icon.avif" alt="" aria-hidden="true"/></span><span className="action-label">WhatsApp</span></a><a className="book-action" href="/book-appointment"><span className="action-icon calendar-icon" aria-hidden="true">＋</span><span className="action-label">Book Appointment</span></a></nav></body></html>;[m
+[32m+[m[32m  return <html lang="en-IN"><body className={`${display.variable} ${sans.variable}`}>  <GoogleAnalytics gaId="G-B0Y32VYD07" /> <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}<details className="mobile-menu"><summary aria-label="Open website menu"><span>Menu</span><i aria-hidden="true"/></summary><nav aria-label="Mobile navigation"><a href="/">Home</a><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a><a href="/conditions">Conditions treated</a><a href="/services">Services</a><a href="/health-library">Health library</a><a href="/clinic-bhiwadi">Clinic & directions</a></nav></details><FloatingWhatsApp/><nav className="mobile-action-bar" aria-label="Quick contact actions"><a href="tel:+919205775932"><span className="mobile-icon-crop call-crop"><img src="/call-contact-icon.webp" alt="" aria-hidden="true"/></span><span className="action-label">Call</span></a><a href="https://wa.me/919205775932" target="_blank" rel="noopener noreferrer"><span className="mobile-icon-crop whatsapp-crop"><img src="/whatsapp-contact-icon.avif" alt="" aria-hidden="true"/></span><span className="action-label">WhatsApp</span></a><a className="book-action" href="/book-appointment"><span className="action-icon calendar-icon" aria-hidden="true">＋</span><span className="action-label">Book Appointment</span></a></nav></body></html>;[m
+ }[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 3b98599..3d2bdf0 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -8,7 +8,8 @@[m
+       "name": "dr-kulwant-yadav-website",[m
+       "version": "1.0.0",[m
+       "dependencies": {[m
+[31m-        "next": "16.2.6",[m
+[32m+[m[32m        "@next/third-parties": "^16.3.3",[m
+[32m+[m[32m        "next": "^16.3.3",[m
+         "react": "19.2.6",[m
+         "react-dom": "19.2.6"[m
+       },[m
+[36m@@ -292,9 +293,9 @@[m
+       }[m
+     },[m
+     "node_modules/@emnapi/runtime": {[m
+[31m-      "version": "1.10.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.10.0.tgz",[m
+[31m-      "integrity": "sha512-ewvYlk86xUoGI0zQRNq/mC+16R1QeDlKQy21Ki3oSYXNgLb45GV1P6A0M+/s6nyCuNDqe5VpaY84BzXGwVbwFA==",[m
+[32m+[m[32m      "version": "1.11.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.11.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==",[m
+       "license": "MIT",[m
+       "optional": true,[m
+       "dependencies": {[m
+[36m@@ -533,9 +534,9 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-darwin-arm64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-imtQ3WMJXbMY4fxb/Ndp6HBTNVtWCUI0WdobyheGf5+ad6xX8VIDO8u2xE4qc/fr08CKG/7dDseFtn6M6g/r3w==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Uhfl4V4lhP2nbUVF9+hyH1+luj86f1gUFeo8ALYxFoULoU+G87D43BfeMP8XHsk9boxAnCY/bf2EHwhA7MuGsA==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -545,19 +546,19 @@[m
+         "darwin"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-darwin-arm64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-darwin-arm64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-darwin-x64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-darwin-x64/-/sharp-darwin-x64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-YNEFAF/4KQ/PeW0N+r+aVVsoIY0/qxxikF2SWdp+NRkmMB7y9LBZAVqQ4yhGCm/H3H270OSykqmQMKLBhBJDEw==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-darwin-x64/-/sharp-darwin-x64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-hWniXY3bG5qKpkKrAwPe4y+VTPmf086YQAnkxWh7uA1YrlRouWGa0M0Mxj3ZjnXFkv7/TD1bTy9lGUK26vRvWw==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -567,19 +568,38 @@[m
+         "darwin"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-darwin-x64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-darwin-x64": "1.3.3"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/@img/sharp-freebsd-wasm32": {[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-freebsd-wasm32/-/sharp-freebsd-wasm32-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-lIsKw/BU+kjB4eZjxrYrZmwOJYi3Ajrv66iAlBmUPyKc3HpnloevB1g3wxGD9P/5BbQ1brBGl65VRRrCvQDEqA==",[m
+[32m+[m[32m      "license": "Apache-2.0",[m
+[32m+[m[32m      "optional": true,[m
+[32m+[m[32m      "os": [[m
+[32m+[m[32m        "freebsd"[m
+[32m+[m[32m      ],[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "@img/sharp-wasm32": "0.35.4"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "funding": {[m
+[32m+[m[32m        "url": "https://opencollective.com/libvips"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-darwin-arm64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-zqjjo7RatFfFoP0MkQ51jfuFZBnVE2pRiaydKJ1G/rHZvnsrHAOcQALIi9sA5co5xenQdTugCvtb1cuf78Vf4g==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-suTBPTDGrI9WodccaDdwZItTSaBYASlBk1NSfElSHrUfzu3szG6lvIF58+WiFvnfzuK8ZBFS5zE00PxqxnRiPg==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -593,9 +613,9 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-darwin-x64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-darwin-x64/-/sharp-libvips-darwin-x64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-1IOd5xfVhlGwX+zXv2N93k0yMONvUlANylbJw1eTah8K/Jtpi15KC+WSiaX/nBmbm2HxRM1gZ0nSdjSsrZbGKg==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-darwin-x64/-/sharp-libvips-darwin-x64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-FVJZ5mITMobmXIz/hPDTw0EintTW5H3WfrxwLqEqjiIihlu+hVRyGrFQ60xl0Lxn7Bt3zdpevPaQi0HEzqz9fw==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -609,12 +629,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-arm": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-arm/-/sharp-libvips-linux-arm-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-bFI7xcKFELdiNCVov8e44Ia4u2byA+l3XtsAj+Q8tfCwO6BQ8iDojYdvoPMqsKDkuoOo+X6HZA0s0q11ANMQ8A==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-arm/-/sharp-libvips-linux-arm-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-3rbU4vqXXc3hY/OiXdl52xZvT0F1yEngWfvqudtPJg/KkyiaQw2DRsFrNzpmLvfavbwOq3qXn36GP8obHRULQA==",[m
+       "cpu": [[m
+         "arm"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -625,12 +648,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-arm64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-arm64/-/sharp-libvips-linux-arm64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-excjX8DfsIcJ10x1Kzr4RcWe1edC9PquDRRPx3YVCvQv+U5p7Yin2s32ftzikXojb1PIFc/9Mt28/y+iRklkrw==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-arm64/-/sharp-libvips-linux-arm64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-0DaL0A6Xu6sQSQFwe4iVCrKWU2cCTItnRsYsCdxAMm9NF6twAA9BKnoqy4hqz4+azQ0JHuA26qiUKsf1XJ/v5A==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -641,12 +667,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-ppc64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-ppc64/-/sharp-libvips-linux-ppc64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-FMuvGijLDYG6lW+b/UvyilUWu5Ayu+3r2d1S8notiGCIyYU/76eig1UfMmkZ7vwgOrzKzlQbFSuQfgm7GYUPpA==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-ppc64/-/sharp-libvips-linux-ppc64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-cdn1OvUBwsXhbC0zSzJnNzf5MZ/mTrobawDvNXBTxe8VtqKAm0sRuEY2Evzovb/w9JMk4TvRxqt1mekSuJz64w==",[m
+       "cpu": [[m
+         "ppc64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -657,12 +686,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-riscv64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-riscv64/-/sharp-libvips-linux-riscv64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-oVDbcR4zUC0ce82teubSm+x6ETixtKZBh/qbREIOcI3cULzDyb18Sr/Wcyx7NRQeQzOiHTNbZFF1UwPS2scyGA==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-riscv64/-/sharp-libvips-linux-riscv64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-HjPVx7yKz+0lqdhDlTw1tt90wamBoxhiXpvl1XZpJLiHH4RCJ5yDTqH+VlYPv2fwFs89JFw4c1IexYOcQUi4IQ==",[m
+       "cpu": [[m
+         "riscv64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -673,12 +705,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-s390x": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-s390x/-/sharp-libvips-linux-s390x-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-qmp9VrzgPgMoGZyPvrQHqk02uyjA0/QrTO26Tqk6l4ZV0MPWIW6LTkqOIov+J1yEu7MbFQaDpwdwJKhbJvuRxQ==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-s390x/-/sharp-libvips-linux-s390x-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-neWLh+3yCNThxnfy3c4BbVBeGgt9aftno+XbT56iK28RgeDs3UOFWviLWlUu0bArYVYJaFDK+RRohbicUNCm8Q==",[m
+       "cpu": [[m
+         "s390x"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -689,12 +724,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linux-x64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-x64/-/sharp-libvips-linux-x64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-tJxiiLsmHc9Ax1bz3oaOYBURTXGIRDODBqhveVHonrHJ9/+k89qbLl0bcJns+e4t4rvaNBxaEZsFtSfAdquPrw==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linux-x64/-/sharp-libvips-linux-x64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-4vKmvAst9nrowcqquKFAyZJUDolUaIp8uRiN0mWFguJ1IplC9/pitXtlnnlU4aa/eJw3J7i67V+pwUL+wZGdsA==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -705,12 +743,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linuxmusl-arm64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linuxmusl-arm64/-/sharp-libvips-linuxmusl-arm64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-FVQHuwx1IIuNow9QAbYUzJ+En8KcVm9Lk5+uGUQJHaZmMECZmOlix9HnH7n1TRkXMS0pGxIJokIVB9SuqZGGXw==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linuxmusl-arm64/-/sharp-libvips-linuxmusl-arm64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Y9kQaLMuNoB0bPYOOdcZMaseNrFpPodIWWMrx+CZyydf2xn68j9WYc6sWWRrDwNkzCQjKYfc68L7jKjGlHMibw==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "musl"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -721,12 +762,15 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-libvips-linuxmusl-x64": {[m
+[31m-      "version": "1.2.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linuxmusl-x64/-/sharp-libvips-linuxmusl-x64-1.2.4.tgz",[m
+[31m-      "integrity": "sha512-+LpyBk7L44ZIXwz/VYfglaX/okxezESc6UxDSoyo2Ks6Jxc4Y7sGjpgU9s4PMgqgjj1gZCylTieNamqA1MF7Dg==",[m
+[32m+[m[32m      "version": "1.3.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-libvips-linuxmusl-x64/-/sharp-libvips-linuxmusl-x64-1.3.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-fj8Mv0HHfD1Rr+4I68+3agJynxDWtBFgicTbSOb9Bke6pIwzGcJ+RX/yHjmiEGFMCavY/dxvem7MyNaJF+wDiw==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "musl"[m
+[32m+[m[32m      ],[m
+       "license": "LGPL-3.0-or-later",[m
+       "optional": true,[m
+       "os": [[m
+[36m@@ -737,204 +781,244 @@[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-arm": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-arm/-/sharp-linux-arm-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-9dLqsvwtg1uuXBGZKsxem9595+ujv0sJ6Vi8wcTANSFpwV/GONat5eCkzQo/1O6zRIkh0m/8+5BjrRr7jDUSZw==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-arm/-/sharp-linux-arm-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-7OAS8gI0EReKGVN2HssHlM6umJgxF5VI3xN0p9FA91p/YO+ou5hiNghLdZ5BEHztwaaK5+bLKRf8x/o2L2nk9A==",[m
+       "cpu": [[m
+         "arm"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-arm": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-arm": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-arm64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-arm64/-/sharp-linux-arm64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-bKQzaJRY/bkPOXyKx5EVup7qkaojECG6NLYswgktOZjaXecSAeCWiZwwiFf3/Y+O1HrauiE3FVsGxFg8c24rZg==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-arm64/-/sharp-linux-arm64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-De4jpEnAU8Hd5oT0j1G3uL4ZvTuipVMn7YC6vPaJhy6/7EwEae0SVAoBrUMYQbkLGDm85taVWwuPc1a44LTzCQ==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-arm64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-arm64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-ppc64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-ppc64/-/sharp-linux-ppc64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-7zznwNaqW6YtsfrGGDA6BRkISKAAE1Jo0QdpNYXNMHu2+0dTrPflTLNkpc8l7MUP5M16ZJcUvysVWWrMefZquA==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-ppc64/-/sharp-linux-ppc64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-2oYZJeIl4kCcMGk4ouZVjnkCtFrpQFlNEtJ6GbxzhHQchwH0NH/qEb9ykmOl29dqwMq+JhFdZn+1ak2FKhI9fQ==",[m
+       "cpu": [[m
+         "ppc64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-ppc64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-ppc64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-riscv64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-riscv64/-/sharp-linux-riscv64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-51gJuLPTKa7piYPaVs8GmByo7/U7/7TZOq+cnXJIHZKavIRHAP77e3N2HEl3dgiqdD/w0yUfiJnII77PuDDFdw==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-riscv64/-/sharp-linux-riscv64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-cPbNChoRURAWdebDIHSenxRpgEdy7JkPydSnUxRm9VvKD7m0/xVaR/8Fzlu81pk5nHEvHH87UZUA7cTtwnbJSA==",[m
+       "cpu": [[m
+         "riscv64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-riscv64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-riscv64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-s390x": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-s390x/-/sharp-linux-s390x-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-nQtCk0PdKfho3eC5MrbQoigJ2gd1CgddUMkabUj+rBevs8tZ2cULOx46E7oyX+04WGfABgIwmMC0VqieTiR4jg==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-s390x/-/sharp-linux-s390x-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-RY0JFY8Fd6RonCBtHz+DvadaPkXDSI1AUn6yWL9TipqkZ1vY8w8evqdgyDFnkm4/K1ve1TvZiaePP5oSd4+WVQ==",[m
+       "cpu": [[m
+         "s390x"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-s390x": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-s390x": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linux-x64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linux-x64/-/sharp-linux-x64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-MEzd8HPKxVxVenwAa+JRPwEC7QFjoPWuS5NZnBt6B3pu7EG2Ge0id1oLHZpPJdn3OQK+BQDiw9zStiHBTJQQQQ==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linux-x64/-/sharp-linux-x64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-9qvvEAuk8k89TfWUoX2htWjbAMX8p+NxCppjpcg5k6xMsjhBQPTsoIh36h9Qde4WRuGpJeYnOjdosDn/cnv+OA==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "glibc"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linux-x64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linux-x64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linuxmusl-arm64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linuxmusl-arm64/-/sharp-linuxmusl-arm64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-fprJR6GtRsMt6Kyfq44IsChVZeGN97gTD331weR1ex1c1rypDEABN6Tm2xa1wE6lYb5DdEnk03NZPqA7Id21yg==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linuxmusl-arm64/-/sharp-linuxmusl-arm64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-KB5jxpfWQTr0nc3xdHtWChdbifHrBGsd2SM62Eyxrl8afikm+f5qGBU75SJIZBT/S1MC8XyacdlXBMSWq6OURA==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "musl"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linuxmusl-arm64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linuxmusl-arm64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-linuxmusl-x64": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@img/sharp-linuxmusl-x64/-/sharp-linuxmusl-x64-0.34.5.tgz",[m
+[31m-      "integrity": "sha512-Jg8wNT1MUzIvhBFxViqrEhWDGzqymo3sV7z7ZsaWbZNDLXRJZoRGrjulp60YYtV4wfY8VIKcWidjojlLcWrd8Q==",[m
+[32m+[m[32m      "version": "0.35.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@img/sharp-linuxmusl-x64/-/sharp-linuxmusl-x64-0.35.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-f+eZJZIQNEEd26RPSW+76chwOf1XtA2Y/O+5ocVyLliHkeih3e+jhLVBdNTd2rS3IbNXK8+ug93Vf5ZXtF5Lxg==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[32m+[m[32m      "libc": [[m
+[32m+[m[32m        "musl"[m
+[32m+[m[32m      ],[m
+       "license": "Apache-2.0",[m
+       "optional": true,[m
+       "os": [[m
+         "linux"[m
+       ],[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || ^20.3.0 || >=21.0.0"[m
+[32m+[m[32m        "node": ">=20.9.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/libvips"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@img/sharp-libvips-linuxmusl-x64": "1.2.4"[m
+[32m+[m[32m        "@img/sharp-libvips-linuxmusl-x64": "1.3.3"[m
+       }[m
+     },[m
+     "node_modules/@img/sharp-wasm32": {[m
+[31m-      "version": "0.34.5",[m
+[31m-      "resolved": "https://reg
