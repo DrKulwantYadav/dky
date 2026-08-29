@@ -1,13 +1,31 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 
-export default function MetaPixel() {
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const META_PIXEL_ID = "1056684433925051";
 
-  if (!pixelId) {
-    return null;
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
   }
+}
+
+export default function MetaPixel() {
+  const pathname = usePathname();
+  const firstPageView = useRef(true);
+
+  useEffect(() => {
+    // The base script records the first view. Next.js route changes need to be
+    // recorded separately because they do not reload the document.
+    if (firstPageView.current) {
+      firstPageView.current = false;
+      return;
+    }
+
+    window.fbq?.("track", "PageView");
+  }, [pathname]);
 
   return (
     <>
@@ -32,11 +50,20 @@ export default function MetaPixel() {
             }(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${pixelId}');
+            fbq('init', '${META_PIXEL_ID}');
             fbq('track', 'PageView');
           `,
         }}
       />
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          alt=""
+        />
+      </noscript>
     </>
   );
 }
