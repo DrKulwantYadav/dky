@@ -3,34 +3,36 @@ import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Free ECG and Heart Check-up Camp | World Heart Day",
-  description: "Join the free ECG and heart check-up camp on 29 September at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav. Call or WhatsApp to register.",
+  title: "Free ECG and Heart Check-up Camp | September 2026",
+  description: "Register for a free ECG and heart check-up on Sundays in September 2026 at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
   path: "/world-heart-day-free-ecg-camp",
 });
 
-const checks = [
-  ["01", "Blood pressure check", "A careful blood-pressure reading with basic interpretation."],
-  ["02", "ECG screening", "A resting ECG when clinically appropriate during the camp."],
-  ["03", "Heart-risk review", "A focused review of symptoms and common cardiovascular risk factors."],
-  ["04", "Doctor guidance", "Practical advice on the next step, follow-up or referral when required."],
+const registrationMessage = "https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20free%20ECG%20and%20heart%20check-up%20camp%20on%206%20September%202026.";
+
+const campHours = [
+  ["6", "Sunday", "9:00 am – 1:00 pm"],
+  ["13", "Sunday", "9:00 am – 1:00 pm"],
+  ["20", "Sunday", "9:00 am – 1:00 pm"],
+  ["27", "Sunday", "9:00 am – 1:00 pm"],
 ];
 
 export default function WorldHeartDayCampPage() {
   return <main className="heart-camp-page">
-    <div className="info-strip"><span>World Heart Day · 29 September</span><strong>Free ECG &amp; heart check-up camp</strong></div>
+    <div className="info-strip"><span>Free heart-health camp · September 2026</span><strong>Free ECG &amp; heart check-up</strong></div>
     <header className="site-header">
       <a className="brand" href="/"><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
-      <nav aria-label="Camp page navigation"><a href="/">Home</a><a href="#camp-details">Camp details</a><a href="#who-should-attend">Who should attend</a><a href="#register">Register</a></nav>
+      <nav aria-label="Camp page navigation"><a href="/">Home</a><a href="#campaign">Camp details</a><a href="#who-should-attend">Who should attend</a><a href="#register">Register</a></nav>
       <a className="header-cta" href="tel:+919205775932">Call to register</a>
     </header>
 
     <section className="heart-camp-hero">
       <div className="heart-camp-copy">
-        <p className="eyebrow"><span/> World Heart Day · 29 September</p>
+        <p className="eyebrow"><span/> Free ECG camp · 6 September 2026</p>
         <h1>Free ECG &amp;<br/><em>Heart Check-up Camp</em></h1>
         <p>Take a simple, informed step toward understanding your heart health with a focused screening and medical guidance at Gopinath Hospital, Bhiwadi.</p>
         <div className="heart-camp-actions">
-          <a className="primary-button" href="https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20free%20World%20Heart%20Day%20ECG%20and%20heart%20check-up%20camp%20on%2029%20September." target="_blank" rel="noopener noreferrer">Register on WhatsApp <span>↗</span></a>
+          <a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">Register on WhatsApp <span>↗</span></a>
           <a className="heart-call-action" href="tel:+919205775932"><small>Call for registration</small><strong>+91 92057 75932</strong></a>
         </div>
       </div>
@@ -43,26 +45,23 @@ export default function WorldHeartDayCampPage() {
           <div className="ecg-line" aria-hidden="true"><i/><i/><i/><i/><i/></div>
         </div>
         <div className="heart-date-card">
-          <span>World Heart Day</span>
-          <strong>29</strong>
-          <b>September</b>
+          <span>Free ECG camp</span>
+          <strong>06</strong>
+          <b>September 2026</b>
           <div><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
           <em>Free camp · Prior registration recommended</em>
         </div>
       </aside>
     </section>
 
-    <section className="heart-camp-intro" id="camp-details">
-      <div><p className="section-label"><span>01</span> What is included</p><h2>A focused check for a <em>healthier heart.</em></h2></div>
-      <p>The camp is designed to identify common warning signs and risk factors that may benefit from further medical attention. Screening does not replace emergency care or a complete cardiology evaluation.</p>
-    </section>
-
-    <section className="heart-check-grid" aria-label="Camp checks">
-      {checks.map(([number, title, description]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{description}</p></article>)}
+    <section className="heart-campaign-message" id="campaign">
+      <span>Heart-health awareness · 2026</span>
+      <h2>Don&apos;t Miss a Beat</h2>
+      <p>In 2026, we will continue the momentum of &lsquo;Don&apos;t Miss a Beat&rsquo;, raising awareness of the world&apos;s number one killer and highlighting the importance of recognising the signs and symptoms of cardiovascular disease (CVD).</p>
     </section>
 
     <section className="heart-attend" id="who-should-attend">
-      <div><p className="section-label light"><span>02</span> Consider attending</p><h2>Know your risk before symptoms become serious.</h2></div>
+      <div><p className="section-label light"><span>01</span> Consider attending</p><h2>Know your risk before symptoms become serious.</h2></div>
       <ul>
         <li>Adults with diabetes, high blood pressure, high cholesterol or excess weight</li>
         <li>People with a family history of heart disease or stroke</li>
@@ -72,18 +71,45 @@ export default function WorldHeartDayCampPage() {
     </section>
 
     <section className="heart-prepare">
-      <div><p className="section-label"><span>03</span> Before you visit</p><h2>Bring a few useful details.</h2></div>
+      <div><p className="section-label"><span>02</span> Before you visit</p><h2>Bring a few useful details.</h2></div>
       <div className="heart-prepare-list"><p><b>Current medicines</b><span>Bring your prescription or an updated medicine list.</span></p><p><b>Previous reports</b><span>Carry earlier ECGs, blood tests or heart-related reports if available.</span></p><p><b>Comfortable clothing</b><span>Wear clothing that allows easy access to the chest, arms and ankles for an ECG.</span></p></div>
     </section>
 
     <section className="heart-register" id="register">
       <p className="eyebrow"><span/> Reserve your place</p>
-      <h2>Join the free camp on <em>29 September.</em></h2>
-      <p>Camp timings and individual availability should be confirmed with the clinic before travelling. Registration is recommended because capacity may be limited.</p>
-      <div><a className="primary-button" href="https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20free%20World%20Heart%20Day%20ECG%20and%20heart%20check-up%20camp%20on%2029%20September." target="_blank" rel="noopener noreferrer">WhatsApp to register <span>↗</span></a><a href="tel:+919205775932">Call +91 92057 75932</a><a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div>
+      <h2>Join the free camp from <em>6 September.</em></h2>
+      <p>Free check-ups are planned on all four Sundays in September. Registration is recommended because capacity may be limited.</p>
+      <div><a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">WhatsApp to register <span>↗</span></a><a href="tel:+919205775932">Call +91 92057 75932</a><a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div>
     </section>
 
-    <section className="heart-emergency-note"><strong>Important</strong><p>A camp screening is not suitable for emergencies. For chest pain, severe breathlessness, fainting, stroke symptoms or another sudden serious symptom, visit the nearest emergency department immediately.</p></section>
+    <section className="heart-location-hours" id="location-hours">
+      <div className="heart-location-heading"><p className="section-label"><span>03</span> Plan your visit</p><h2>Location &amp; hours</h2></div>
+      <div className="heart-location-grid">
+        <article className="heart-map-card">
+          <iframe title="Gopinath Hospital location on Google Maps" src="https://www.google.com/maps?q=Gopinath%20Hospital%2C%20H-226%20Industrial%20Area%2C%20Bhiwadi%2C%20Rajasthan%20301019&amp;output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>
+          <a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a>
+        </article>
+        <article className="heart-contact-card">
+          <span>Hospital details</span>
+          <h3>Gopinath Hospital</h3>
+          <address>H-226, Industrial Area<br/>Near Ramphal Cinema<br/>Bhiwadi – 301019, Rajasthan</address>
+          <dl><div><dt>Mobile</dt><dd><a href="tel:+919205775932">+91 92057 75932</a></dd></div><div><dt>Email enquiries</dt><dd><a href="tel:+919205775932">Contact the clinic to confirm</a></dd></div></dl>
+        </article>
+        <article className="heart-hours-card">
+          <span>Free camp check-up hours</span>
+          <h3>September 2026</h3>
+          <div className="heart-hours-list">{campHours.map(([date, day, time]) => <p key={date}><strong>{date}</strong><span>{day}</span><b>{time}</b></p>)}</div>
+        </article>
+      </div>
+    </section>
+
+    <section className="heart-final-cta">
+      <p>Four Sundays. One important step for your heart.</p>
+      <h2>Don&apos;t miss the opportunity to get a free ECG check-up.</h2>
+      <div><a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">Register for free <span>↗</span></a><a href="tel:+919205775932">Call the clinic</a></div>
+      <small>For chest pain, severe breathlessness, fainting, stroke symptoms or another sudden serious symptom, visit the nearest emergency department immediately.</small>
+    </section>
+
     <SiteFooter />
   </main>;
 }

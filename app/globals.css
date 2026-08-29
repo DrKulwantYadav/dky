@@ -752,3 +752,51 @@ footer .footer-social a:hover .footer-social-icon{transform:none}
 .conditions-hub .hub-hero h1,.conditions-hub .hub-hero>p,.services-page .services-hero h1,.services-page .services-hero>p,.services-page .service-jump{position:relative;z-index:1}
 @media(max-width:900px){.conditions-hub .hub-hero{background-image:linear-gradient(90deg,rgba(247,250,247,.97) 0%,rgba(247,250,247,.92) 62%,rgba(247,250,247,.66) 100%),url('/conditions-page-hero-background.png');background-position:center,58% center}.services-page .services-hero{background-image:linear-gradient(90deg,rgba(247,250,252,.97) 0%,rgba(247,250,252,.93) 64%,rgba(247,250,252,.7) 100%),url('/services-page-hero-background.png');background-position:center,60% center}}
 @media(max-width:620px){.conditions-hub .hub-hero,.services-page .services-hero{background-size:100% 100%,auto 100%}.conditions-hub .hub-hero{background-image:linear-gradient(90deg,rgba(247,250,247,.98) 0%,rgba(247,250,247,.95) 70%,rgba(247,250,247,.78) 100%),url('/conditions-page-hero-background.png');background-position:center,62% center}.services-page .services-hero{background-image:linear-gradient(90deg,rgba(247,250,252,.98) 0%,rgba(247,250,252,.95) 72%,rgba(247,250,252,.8) 100%),url('/services-page-hero-background.png');background-position:center,64% center}}
+
+/* September 2026 free ECG camp */
+.heart-camp-page{--heart-red:#d61b26;--heart-white:#ffffff}
+.heart-camp-page .heart-camp-hero{background:radial-gradient(circle at 72% 18%,rgba(255,255,255,.13),transparent 24%),var(--heart-red);color:var(--heart-white)}
+.heart-camp-page .heart-camp-copy .eyebrow,.heart-camp-page .heart-camp-copy h1 em,.heart-camp-page .heart-camp-copy>p:not(.eyebrow),.heart-camp-page .heart-call-action small{color:var(--heart-white)}
+.heart-camp-page .heart-camp-actions .primary-button{background:var(--heart-white);color:var(--heart-red)}
+.heart-camp-page .heart-symbol{background:var(--heart-white);color:var(--heart-red)}
+.heart-camp-page .ecg-line:before,.heart-camp-page .ecg-line:after,.heart-camp-page .ecg-line i{background:var(--heart-white)}
+.heart-camp-page .heart-date-card{background:var(--heart-white)}
+.heart-camp-page .heart-date-card>span,.heart-camp-page .heart-date-card>strong,.heart-camp-page .heart-date-card small{color:var(--heart-red)}
+.heart-campaign-message{margin:clamp(70px,8vw,120px) clamp(30px,10vw,165px);padding:clamp(60px,7vw,105px);background:var(--heart-red);color:var(--heart-white);text-align:center}
+.heart-campaign-message>span{text-transform:uppercase;letter-spacing:.17em;font-weight:700;font-size:11px}
+.heart-campaign-message h2{font-size:clamp(52px,6.5vw,92px);margin:18px 0 28px}
+.heart-campaign-message p{font-family:var(--font-display);font-size:clamp(21px,2vw,30px);line-height:1.55;max-width:1050px;margin:auto}
+.heart-camp-page .heart-attend li:before{color:var(--heart-red)}
+.heart-camp-page .heart-register{background:var(--heart-red);color:var(--heart-white)}
+.heart-camp-page .heart-register .eyebrow,.heart-camp-page .heart-register h2 em,.heart-camp-page .heart-register>p:not(.eyebrow){color:var(--heart-white)}
+.heart-camp-page .heart-register .primary-button{background:var(--heart-white);color:var(--heart-red)}
+.heart-location-hours{padding:clamp(95px,10vw,150px) clamp(30px,8vw,130px);background:var(--heart-white)}
+.heart-location-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:55px}
+.heart-location-heading h2{font-size:clamp(48px,6vw,80px);color:var(--navy);margin:0}
+.heart-location-grid{display:grid;grid-template-columns:1.15fr .85fr 1fr;gap:22px}
+.heart-location-grid article{min-width:0;border:1px solid var(--line);background:var(--heart-white)}
+.heart-map-card{display:flex;flex-direction:column}
+.heart-map-card iframe{width:100%;min-height:380px;border:0;flex:1}
+.heart-map-card>a{padding:18px 24px;color:var(--heart-red);font-weight:700;border-top:1px solid var(--line)}
+.heart-contact-card,.heart-hours-card{padding:36px 32px}
+.heart-contact-card>span,.heart-hours-card>span{text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:700;color:var(--heart-red)}
+.heart-contact-card h3,.heart-hours-card h3{font-family:var(--font-display);font-size:34px;color:var(--navy);margin:18px 0 30px}
+.heart-contact-card address{font-style:normal;color:var(--muted);font-size:17px;line-height:1.7}
+.heart-contact-card dl{margin:38px 0 0;border-top:1px solid var(--line)}
+.heart-contact-card dl>div{padding:17px 0;border-bottom:1px solid var(--line)}
+.heart-contact-card dt{text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--muted)}
+.heart-contact-card dd{margin:6px 0 0;font-weight:700;overflow-wrap:anywhere}
+.heart-hours-list{border-top:2px solid var(--heart-red)}
+.heart-hours-list p{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;margin:0;padding:18px 0;border-bottom:1px solid var(--line)}
+.heart-hours-list strong{font-family:var(--font-display);font-size:30px;color:var(--heart-red)}
+.heart-hours-list span{color:var(--muted)}
+.heart-hours-list b{font-size:13px;color:var(--navy)}
+.heart-final-cta{text-align:center;padding:clamp(95px,10vw,150px) 28px;background:#f4f1ed}
+.heart-final-cta>p{text-transform:uppercase;letter-spacing:.16em;font-weight:700;font-size:11px;color:var(--heart-red)}
+.heart-final-cta h2{font-size:clamp(48px,6vw,84px);color:var(--navy);max-width:1050px;margin:22px auto 40px}
+.heart-final-cta>div{display:flex;justify-content:center;gap:28px;align-items:center;flex-wrap:wrap}
+.heart-final-cta .primary-button{background:var(--heart-red);color:var(--heart-white)}
+.heart-final-cta>div>a:not(.primary-button){font-weight:700;color:var(--heart-red);border-bottom:1px solid var(--heart-red);padding:10px 0}
+.heart-final-cta>small{display:block;max-width:900px;margin:48px auto 0;color:var(--muted);line-height:1.6}
+@media(max-width:980px){.heart-location-grid{grid-template-columns:1fr 1fr}.heart-map-card{grid-column:1/-1}.heart-location-heading{align-items:start;flex-direction:column}}
+@media(max-width:620px){.heart-campaign-message{margin:60px 20px;padding:58px 24px}.heart-location-hours{padding:82px 24px}.heart-location-grid{grid-template-columns:1fr}.heart-map-card{grid-column:auto}.heart-map-card iframe{min-height:310px}.heart-contact-card,.heart-hours-card{padding:30px 24px}.heart-hours-list p{grid-template-columns:46px 1fr}.heart-hours-list b{grid-column:2}.heart-final-cta{padding:82px 24px}.heart-final-cta h2{font-size:45px}}
