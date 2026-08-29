@@ -762,6 +762,19 @@ footer .footer-social a:hover .footer-social-icon{transform:none}
 .heart-camp-page .ecg-line:before,.heart-camp-page .ecg-line:after,.heart-camp-page .ecg-line i{background:var(--heart-white)}
 .heart-camp-page .heart-date-card{background:var(--heart-white)}
 .heart-camp-page .heart-date-card>span,.heart-camp-page .heart-date-card>strong,.heart-camp-page .heart-date-card small{color:var(--heart-red)}
+.heart-focused-check{padding:clamp(95px,10vw,150px) clamp(30px,8vw,130px);background:var(--heart-white)}
+.heart-focused-heading{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);column-gap:clamp(50px,8vw,120px);align-items:end;margin-bottom:60px}
+.heart-focused-heading .section-label{grid-column:1/-1;margin-bottom:28px}
+.heart-focused-heading h2{font-size:clamp(48px,5.6vw,80px);color:var(--navy);margin:0}
+.heart-focused-heading h2 em{color:var(--heart-red)}
+.heart-focused-heading>p:last-child{font-size:18px;line-height:1.75;color:var(--muted);margin:0}
+.heart-focused-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line)}
+.heart-focused-grid article{min-height:325px;padding:34px 28px;background:var(--heart-white);border-right:1px solid var(--line)}
+.heart-focused-grid article:last-child{border-right:0}
+.heart-focused-grid article>span{font-family:var(--font-display);font-size:21px;color:var(--heart-red)}
+.heart-focused-grid h3{font-family:var(--font-display);font-size:29px;line-height:1.15;color:var(--navy);margin:55px 0 18px}
+.heart-focused-grid p{font-size:15px;line-height:1.7;color:var(--muted);margin:0}
+.heart-focused-grid strong{color:var(--navy)}
 .heart-campaign-message{margin:clamp(70px,8vw,120px) clamp(30px,10vw,165px);padding:clamp(60px,7vw,105px);background:var(--heart-red);color:var(--heart-white);text-align:center}
 .heart-campaign-message>span{text-transform:uppercase;letter-spacing:.17em;font-weight:700;font-size:11px}
 .heart-campaign-message h2{font-size:clamp(52px,6.5vw,92px);margin:18px 0 28px}
@@ -798,5 +811,5 @@ footer .footer-social a:hover .footer-social-icon{transform:none}
 .heart-final-cta .primary-button{background:var(--heart-red);color:var(--heart-white)}
 .heart-final-cta>div>a:not(.primary-button){font-weight:700;color:var(--heart-red);border-bottom:1px solid var(--heart-red);padding:10px 0}
 .heart-final-cta>small{display:block;max-width:900px;margin:48px auto 0;color:var(--muted);line-height:1.6}
-@media(max-width:980px){.heart-location-grid{grid-template-columns:1fr 1fr}.heart-map-card{grid-column:1/-1}.heart-location-heading{align-items:start;flex-direction:column}}
-@media(max-width:620px){.heart-campaign-message{margin:60px 20px;padding:58px 24px}.heart-location-hours{padding:82px 24px}.heart-location-grid{grid-template-columns:1fr}.heart-map-card{grid-column:auto}.heart-map-card iframe{min-height:310px}.heart-contact-card,.heart-hours-card{padding:30px 24px}.heart-hours-list p{grid-template-columns:46px 1fr}.heart-hours-list b{grid-column:2}.heart-final-cta{padding:82px 24px}.heart-final-cta h2{font-size:45px}}
+@media(max-width:980px){.heart-focused-heading{grid-template-columns:1fr;gap:28px}.heart-focused-grid{grid-template-columns:1fr 1fr}.heart-focused-grid article:nth-child(2){border-right:0}.heart-focused-grid article:nth-child(-n+2){border-bottom:1px solid var(--line)}.heart-location-grid{grid-template-columns:1fr 1fr}.heart-map-card{grid-column:1/-1}.heart-location-heading{align-items:start;flex-direction:column}}
+@media(max-width:620px){.heart-focused-check{padding:82px 24px}.heart-focused-heading{margin-bottom:40px}.heart-focused-heading h2{font-size:44px}.heart-focused-heading>p:last-child{font-size:16px}.heart-focused-grid{grid-template-columns:1fr}.heart-focused-grid article,.heart-focused-grid article:nth-child(2){min-height:auto;border-right:0;border-bottom:1px solid var(--line)}.heart-focused-grid article:last-child{border-bottom:0}.heart-focused-grid h3{margin-top:36px}.heart-campaign-message{margin:60px 20px;padding:58px 24px}.heart-location-hours{padding:82px 24px}.heart-location-grid{grid-template-columns:1fr}.heart-map-card{grid-column:auto}.heart-map-card iframe{min-height:310px}.heart-contact-card,.heart-hours-card{padding:30px 24px}.heart-hours-list p{grid-template-columns:46px 1fr}.heart-hours-list b{grid-column:2}.heart-final-cta{padding:82px 24px}.heart-final-cta h2{font-size:45px}}

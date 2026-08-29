@@ -17,6 +17,29 @@ const campHours = [
   ["27", "Sunday", "9:00 am – 1:00 pm"],
 ];
 
+const focusedChecks = [
+  {
+    number: "01",
+    title: "12-Lead ECG",
+    description: <>Performed using the US FDA-approved <strong>GE MAC 5 A4 system</strong>, featuring the globally recognized <strong>Marquette™ ECG Analysis Algorithm</strong> for accurate diagnosis and rhythm analysis.</>,
+  },
+  {
+    number: "02",
+    title: "Blood Pressure & BMI",
+    description: <>Blood pressure check and Body Mass Index (BMI) calculation.</>,
+  },
+  {
+    number: "03",
+    title: "Waist-to-Hip Ratio",
+    description: <>An important measure for assessing obesity and cardiovascular risk, which is often overlooked.</>,
+  },
+  {
+    number: "04",
+    title: "Doctor guidance",
+    description: <>Direct medical guidance based on the screening results, helping participants determine the appropriate next steps for their heart health.</>,
+  },
+];
+
 export default function WorldHeartDayCampPage() {
   return <main className="heart-camp-page">
     <div className="info-strip"><span>Free heart-health camp · September 2026</span><strong>Free ECG &amp; heart check-up</strong></div>
@@ -52,6 +75,21 @@ export default function WorldHeartDayCampPage() {
           <em>Free camp · Prior registration recommended</em>
         </div>
       </aside>
+    </section>
+
+    <section className="heart-focused-check" id="camp-details">
+      <div className="heart-focused-heading">
+        <p className="section-label"><span>Free services</span> What is included</p>
+        <h2>A focused check for <em>your heart.</em></h2>
+        <p>To ensure excellent check-up quality, we will use high-end diagnostic equipment rather than conventional camp-level equipment. Each participant will receive the following services completely free of charge:</p>
+      </div>
+      <div className="heart-focused-grid">
+        {focusedChecks.map((check) => <article key={check.number}>
+          <span>{check.number}</span>
+          <h3>{check.title}</h3>
+          <p>{check.description}</p>
+        </article>)}
+      </div>
     </section>
 
     <section className="heart-campaign-message" id="campaign">
