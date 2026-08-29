@@ -30,8 +30,8 @@ const focusedChecks = [
   },
   {
     number: "03",
-    title: "Waist-to-Hip Ratio",
-    description: <>An important measure for assessing obesity and cardiovascular risk, which is often overlooked.</>,
+    title: "Heart-risk review",
+    description: <>A focused review of symptoms and common cardiovascular risk factors.</>,
   },
   {
     number: "04",
