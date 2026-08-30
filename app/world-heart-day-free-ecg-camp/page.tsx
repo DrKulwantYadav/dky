@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
+import CampRegistration from "./CampRegistration";
 
 export const metadata: Metadata = pageMetadata({
   title: "Free ECG and Heart Check-up Camp | September 2026",
   description: "Register for a free ECG and heart check-up on Sundays in September 2026 at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
   path: "/world-heart-day-free-ecg-camp",
 });
-
-const registrationMessage = "https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20free%20ECG%20and%20heart%20check-up%20camp%20on%206%20September%202026.";
 
 const campHours = [
   ["6", "Sunday", "9:00 am – 1:00 pm"],
@@ -46,7 +45,7 @@ export default function WorldHeartDayCampPage() {
     <header className="site-header">
       <a className="brand" href="/"><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
       <nav aria-label="Camp page navigation"><a href="/">Home</a><a href="#campaign">Camp details</a><a href="#who-should-attend">Who should attend</a><a href="#register">Register</a></nav>
-      <a className="header-cta" href="tel:+919205775932">Call to register</a>
+      <a className="header-cta" href="#register">Register free</a>
     </header>
 
     <section className="heart-camp-hero">
@@ -54,10 +53,7 @@ export default function WorldHeartDayCampPage() {
         <p className="eyebrow"><span/> Free ECG camp · 6 September 2026</p>
         <h1>Free ECG &amp;<br/><em>Heart Check-up Camp</em></h1>
         <p>Take a simple, informed step toward understanding your heart health with a focused screening and medical guidance at Gopinath Hospital, Bhiwadi.</p>
-        <div className="heart-camp-actions">
-          <a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">Register on WhatsApp <span>↗</span></a>
-          <a className="heart-call-action" href="tel:+919205775932"><small>Call for registration</small><strong>+91 92057 75932</strong></a>
-        </div>
+        <div className="heart-camp-actions"><CampRegistration compact /></div>
       </div>
       <aside className="heart-camp-visual" aria-label="Dr. Kulwant Yadav and camp details">
         <div className="heart-portrait-wrap">
@@ -117,7 +113,8 @@ export default function WorldHeartDayCampPage() {
       <p className="eyebrow"><span/> Reserve your place</p>
       <h2>Join the free camp from <em>6 September.</em></h2>
       <p>Free check-ups are planned on all four Sundays in September. Registration is recommended because capacity may be limited.</p>
-      <div><a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">WhatsApp to register <span>↗</span></a><a href="tel:+919205775932">Call +91 92057 75932</a><a href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div>
+      <CampRegistration />
+      <a className="heart-register-directions" href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a>
     </section>
 
     <section className="heart-location-hours" id="location-hours">
@@ -144,7 +141,7 @@ export default function WorldHeartDayCampPage() {
     <section className="heart-final-cta">
       <p>Four Sundays. One important step for your heart.</p>
       <h2>Don&apos;t miss the opportunity to get a free ECG check-up.</h2>
-      <div><a className="primary-button" href={registrationMessage} target="_blank" rel="noopener noreferrer">Register for free <span>↗</span></a><a href="tel:+919205775932">Call the clinic</a></div>
+      <CampRegistration compact />
       <small>For chest pain, severe breathlessness, fainting, stroke symptoms or another sudden serious symptom, visit the nearest emergency department immediately.</small>
     </section>
 
