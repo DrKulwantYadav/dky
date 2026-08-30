@@ -17,6 +17,12 @@ export default function MetaPixel() {
   const firstPageView = useRef(true);
 
   useEffect(() => {
+    const hasRecoveryHash = window.location.hash.includes("type=invite") || window.location.hash.includes("type=recovery");
+    const hasAuthCode = new URLSearchParams(window.location.search).has("code");
+    if ((hasRecoveryHash || hasAuthCode) && !window.location.pathname.startsWith("/admin/setup-password")) {
+      window.location.replace(`/admin/setup-password${window.location.search}${window.location.hash}`);
+      return;
+    }
     // The base script records the first view. Next.js route changes need to be
     // recorded separately because they do not reload the document.
     if (firstPageView.current) {

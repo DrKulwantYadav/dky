@@ -23,7 +23,12 @@ export async function POST(request: Request) {
     if (!supabaseUrl || !supabaseKey) return NextResponse.json({ error: "Online registration is temporarily unavailable. Please use WhatsApp." }, { status: 503 });
 
     const supabase = createClient(supabaseUrl, supabaseKey, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { error } = await supabase.from("camp_registrations").insert({ name, age, mobile, registration_for: registrationFor });
+    const { error } = await supabase.rpc("submit_public_camp_registration", {
+      p_full_name: name,
+      p_age: age,
+      p_phone: mobile,
+      p_registration_for: registrationFor,
+    });
 
     if (error) {
       console.error("Camp registration insert failed", error.code);
