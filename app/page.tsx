@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ConditionCarousel from "./ConditionCarousel";
 import { pageMetadata } from "./seo";
 import SiteFooter from "./SiteFooter";
+import CampPopup from "./CampPopup";
 
 export const metadata: Metadata = pageMetadata({
   title: "Internal Medicine Doctor in Bhiwadi",
@@ -21,6 +22,7 @@ const faqs = [
 
 export default function Home() {
   return <main>
+    <CampPopup />
     <div className="info-strip"><span>Gopinath Hospital, Bhiwadi · Call or WhatsApp +91 92057 75932</span><strong>Medical emergency? Visit the nearest emergency department.</strong></div>
     <header className="site-header">
       <a className="brand" href="#home"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
