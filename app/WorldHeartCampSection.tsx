@@ -20,15 +20,16 @@ export default function WorldHeartCampSection() {
   if (!visible) return null;
 
   return <section className="home-heart-camp" aria-labelledby="home-heart-camp-title">
-    <div className="home-heart-camp-image">
-      <img src="/dr-kulwant-yadav-portrait.png" alt="Dr. Kulwant Yadav, Consultant Internal Medicine"/>
-      <div className="home-heart-camp-date"><small>Free camp</small><strong>Every Sunday</strong><span>06 · 13 · 20 · 27 September</span></div>
+    <div className="home-heart-camp-date">
+      <small>Free camp · September 2026</small>
+      <strong>Every<br/>Sunday</strong>
+      <div><span>06</span><span>13</span><span>20</span><span>27</span></div>
+      <b>9:00 am – 1:00 pm</b>
     </div>
     <div className="home-heart-camp-copy">
       <p className="section-label light"><span>Heart-health initiative</span> September 2026</p>
-      <h2 id="home-heart-camp-title">Don&apos;t miss a beat.<br/><em>Get your free heart check-up.</em></h2>
-      <p>Join Dr. Kulwant Yadav at Gopinath Hospital, Bhiwadi, for free ECG screening, blood-pressure and BMI checks, heart-risk review and direct medical guidance.</p>
-      <div className="home-heart-camp-meta"><span><small>Camp hours</small><strong>9:00 am – 1:00 pm</strong></span><span><small>Location</small><strong>Gopinath Hospital</strong></span></div>
+      <h2 id="home-heart-camp-title">Free ECG &amp; <em>heart check-up camp.</em></h2>
+      <p>Free ECG screening, blood-pressure and BMI checks, heart-risk review and direct medical guidance at Gopinath Hospital, Bhiwadi.</p>
       <a href="/world-heart-day-free-ecg-camp">Explore the free camp <span>→</span></a>
     </div>
   </section>;
