@@ -65,9 +65,8 @@ export default function WorldHeartDayCampPage() {
         </div>
         <div className="heart-date-card">
           <span>Free ECG camp</span>
-          <strong>06</strong>
-          <b>September 2026</b>
-          <div><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
+          <div className="heart-date-lockup"><strong>06</strong><p><b>September 2026</b></p></div>
+          <div className="heart-date-venue"><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
           <em>Free camp · Prior registration recommended</em>
         </div>
       </aside>
