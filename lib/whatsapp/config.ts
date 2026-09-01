@@ -20,3 +20,28 @@ export function supabaseAdminConfig() {
     serviceRoleKey: required("SUPABASE_SERVICE_ROLE_KEY"),
   };
 }
+
+export function qstashConfig() {
+  const destinationUrl = qstashDestinationUrl();
+  return {
+    token: required("QSTASH_TOKEN"),
+    destinationUrl,
+  };
+}
+
+function qstashDestinationUrl() {
+  const destinationUrl = required("QSTASH_FOLLOW_UP_URL");
+  const parsed = new URL(destinationUrl);
+  if (parsed.protocol !== "https:" || parsed.pathname !== "/api/qstash/whatsapp-follow-up") {
+    throw new Error("QSTASH_FOLLOW_UP_URL must be the HTTPS WhatsApp follow-up endpoint");
+  }
+  return parsed.toString();
+}
+
+export function qstashReceiverConfig() {
+  return {
+    currentSigningKey: required("QSTASH_CURRENT_SIGNING_KEY"),
+    nextSigningKey: required("QSTASH_NEXT_SIGNING_KEY"),
+    destinationUrl: qstashDestinationUrl(),
+  };
+}

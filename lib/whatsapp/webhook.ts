@@ -1,6 +1,7 @@
 import { createSupabaseAdmin, writeSystemLog } from "./supabase";
 import { normalizeIndianPhone } from "./security";
 import { sendConfirmation, sendHelpMenu, sendShareFollowUp, sendStaffBusyMessage, sendTextMessage } from "./messages";
+import { scheduleWhatsAppFollowUp } from "./qstash";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -94,13 +95,32 @@ async function register(message: JsonRecord, phone: string, registration: NonNul
     confirmed_at: new Date().toISOString(),
   }).eq("id", registrationId);
 
-  await writeSystemLog("follow_up_pending", {
+  const pendingPayload = {
     message_id: text(message.id),
     registration_id: registrationId,
     phone,
     due_at: new Date(Date.now() + 60_000).toISOString(),
     confirmation_message_id: result.messages?.[0]?.id || null,
-  });
+  };
+  const { data: pending, error: pendingError } = await supabase
+    .from("system_logs")
+    .insert({ integration: "Meta WhatsApp", event: "follow_up_pending", payload: pendingPayload })
+    .select("id")
+    .single();
+  if (pendingError || !pending) throw new Error(`Follow-up outbox write failed: ${pendingError?.code || "unknown"}`);
+
+  try {
+    const scheduled = await scheduleWhatsAppFollowUp(pending.id);
+    await supabase.from("system_logs").update({
+      payload: { ...pendingPayload, qstash_message_id: scheduled.messageId },
+    }).eq("id", pending.id);
+  } catch (scheduleError) {
+    await supabase.from("system_logs").update({
+      event: "follow_up_schedule_failed",
+      error: scheduleError instanceof Error ? scheduleError.message.slice(0, 500) : "Unknown QStash error",
+    }).eq("id", pending.id);
+    throw scheduleError;
+  }
 }
 
 async function handleReply(message: JsonRecord, phone: string) {

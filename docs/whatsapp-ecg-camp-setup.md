@@ -17,9 +17,9 @@ The registrant's WhatsApp sender number is authoritative; the Flow must not ask 
 
 ## Deployment secrets
 
-Copy the names from `.env.example` into the deployment environment. Generate independent high-entropy values for `WHATSAPP_VERIFY_TOKEN` and `CRON_SECRET`. Never place the Meta token, app secret, Supabase service-role key, or cron secret in client code or in a `NEXT_PUBLIC_` variable.
+Copy the names from `.env.example` into the deployment environment. Generate a high-entropy value for `WHATSAPP_VERIFY_TOKEN`. Copy `QSTASH_TOKEN`, `QSTASH_CURRENT_SIGNING_KEY`, and `QSTASH_NEXT_SIGNING_KEY` from the Upstash QStash dashboard. Never place the Meta token, app secret, Supabase service-role key, QStash token, or signing keys in client code or in a `NEXT_PUBLIC_` variable.
 
-Vercel supplies `Authorization: Bearer $CRON_SECRET` to cron requests. The scheduled processor runs once per minute, so the follow-up is normally delivered between 1 and 2 minutes after registration. Exact-to-the-second delivery requires an external delayed-job service.
+Set `QSTASH_FOLLOW_UP_URL` to `https://www.drkulwantyadav.com/api/qstash/whatsapp-follow-up`. QStash holds each follow-up for one minute and then calls this endpoint. The endpoint accepts only correctly signed QStash requests and checks the existing outbox record before sending, so a patient reply still cancels the message. No Vercel cron is used, which keeps deployment compatible with the Vercel Hobby plan.
 
 ## Production checks
 
