@@ -3,6 +3,7 @@ import { requireAdmin } from "@/lib/admin/auth";
 import { createClient } from "@/lib/supabase/server";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { RegistrationActions } from "@/components/admin/RegistrationActions";
+import { ImportRegistrations } from "@/components/admin/ImportRegistrations";
 
 export default async function CampRegistrationsPage({ searchParams }: { searchParams: Promise<Record<string,string|undefined>> }) {
   await requireAdmin(); const p=await searchParams; const page=Math.max(1,Number(p.page)||1); const size=20; const supabase=await createClient();
@@ -14,6 +15,6 @@ export default async function CampRegistrationsPage({ searchParams }: { searchPa
 }
 
 function Filters(){return <form className="admin-filters"><input name="q" placeholder="Search name, phone, area or ID"/><select name="confirmation"><option value="">All confirmations</option><option>Pending</option><option>Confirmed</option><option>Rejected</option></select><select name="reminder"><option value="">All reminders</option><option>Not Scheduled</option><option>Scheduled</option><option>Sent</option><option>Failed</option></select><select name="attendance"><option value="">All attendance</option><option>Pending</option><option>Attended</option><option>No-show</option><option>Cancelled</option></select><button>Apply filters</button><Link href="/admin/free-camp-registrations">Clear filters</Link></form>}
-export function PageHead({title,subtitle,exportType}:{title:string;subtitle:string;exportType?:string}){return <div className="admin-page-heading"><div><p>Patient CRM</p><h1>{title}</h1><span>{subtitle}</span></div>{exportType&&<a className="admin-secondary-button" href={`/api/admin/export?type=${exportType}`}>Export CSV</a>}</div>}
+export function PageHead({title,subtitle,exportType}:{title:string;subtitle:string;exportType?:"camp"|"regular"}){return <div className="admin-page-heading"><div><p>Patient CRM</p><h1>{title}</h1><span>{subtitle}</span></div>{exportType&&<div className="admin-page-actions"><ImportRegistrations type={exportType}/><a className="admin-secondary-button" href={`/api/admin/export?type=${exportType}`}>Export CSV</a></div>}</div>}
 export function Empty({text}:{text:string}){return <div className="admin-empty"><strong>Nothing to show</strong><p>{text}</p></div>}
 export function Pagination({page,pages}:{page:number;pages:number}){return <nav className="admin-pagination"><Link aria-disabled={page<=1} href={`?page=${Math.max(1,page-1)}`}>Previous</Link><span>Page {page} of {pages}</span><Link aria-disabled={page>=pages} href={`?page=${Math.min(pages,page+1)}`}>Next</Link></nav>}

@@ -17,10 +17,10 @@ export default async function AdminLogin({ searchParams }: { searchParams: Promi
   return (
     <main className="admin-login-page">
       <section className="admin-login-card">
-        <div className="admin-brand-mark">GY</div>
-        <p className="admin-eyebrow">Gopinath Hospital</p>
+        <div className="admin-brand-mark">KY</div>
+        <p className="admin-eyebrow">Dr Kulwant Yadav</p>
         <h1>Admin CRM</h1>
-        <p>Secure access for authorized hospital staff.</p>
+        <p>Secure access for authorized clinic staff.</p>
         {errorMessage && <div className="admin-alert error">{errorMessage}</div>}
         <form action={login} className="admin-form">
           <label>Email<input name="email" type="email" autoComplete="email" required /></label>

@@ -19,7 +19,7 @@ export function AdminShell({ children, name, role }: { children: ReactNode; name
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
-        <Link className="admin-logo" href="/admin"><span>GY</span><div>Gopinath Hospital<small>Patient CRM</small></div></Link>
+        <Link className="admin-logo" href="/admin"><span>KY</span><div>Dr Kulwant Yadav<small>Patient CRM</small></div></Link>
         <nav>{navigation.map(([label, href, Icon]) => <Link href={href} key={href}><Icon size={18} />{label}</Link>)}</nav>
         <form action={logout}><button type="submit"><LogOut size={18} />Logout</button></form>
       </aside>
