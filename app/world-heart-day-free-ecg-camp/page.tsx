@@ -50,7 +50,7 @@ export default function WorldHeartDayCampPage() {
 
     <section className="heart-camp-hero">
       <div className="heart-camp-copy">
-        <p className="eyebrow"><span/> Free ECG camp · 6 September 2026</p>
+        <p className="eyebrow"><span/> Free ECG camp · 13 September 2026</p>
         <h1>Free ECG &amp;<br/><em>Heart Check-up Camp</em></h1>
         <p>Take a simple, informed step toward understanding your heart health with a focused screening and medical guidance at Gopinath Hospital, Bhiwadi.</p>
         <div className="heart-camp-actions"><CampRegistration compact /></div>
@@ -65,7 +65,7 @@ export default function WorldHeartDayCampPage() {
         </div>
         <div className="heart-date-card">
           <span>Free ECG camp</span>
-          <div className="heart-date-lockup"><strong>06</strong><p><b>September 2026</b></p></div>
+          <div className="heart-date-lockup"><strong>13</strong><p><b>September 2026</b></p></div>
           <div className="heart-date-venue"><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
           <em>Free camp · Prior registration recommended</em>
         </div>
@@ -110,7 +110,7 @@ export default function WorldHeartDayCampPage() {
 
     <section className="heart-register" id="register">
       <p className="eyebrow"><span/> Reserve your place</p>
-      <h2>Join the free camp from <em>6 September.</em></h2>
+      <h2>Join the free camp from <em>13 September.</em></h2>
       <p>Free check-ups are planned on all four Sundays in September. Registration is recommended because capacity may be limited.</p>
       <CampRegistration />
       <a className="heart-register-directions" href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a>
