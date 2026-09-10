@@ -736,7 +736,7 @@ footer .footer-social a:hover .footer-social-icon{transform:none}
 /* Crawlable, descriptive pathways to every clinical resource. */
 footer .footer-directory{grid-column:1/-1;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;margin:36px 0 28px;padding:28px 0;border-top:1px solid rgba(190,207,211,.24);border-bottom:1px solid rgba(190,207,211,.24)}
 footer .footer-directory>div{min-width:0}footer .footer-directory strong{display:block;margin-bottom:13px;color:#fff;font-size:13px;letter-spacing:.04em}footer .footer-directory nav{display:flex;flex-wrap:wrap;gap:8px 16px}footer .footer-directory a{color:#bac4c3;font-size:13px;line-height:1.45;text-decoration:none}footer .footer-directory a:hover,footer .footer-directory a:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:3px}
-@media(min-width:901px){footer .footer-links{grid-template-columns:repeat(3,minmax(150px,1fr))}}
+@media(min-width:901px){footer .footer-links{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:820px){footer .footer-directory{grid-template-columns:1fr 1fr}}@media(max-width:560px){footer .footer-directory{grid-template-columns:1fr;gap:22px;margin-top:28px;padding:24px 0}footer .footer-directory nav{gap:8px 14px}}
 
 /* Image-led condition groups matching the homepage card system */
@@ -857,7 +857,7 @@ footer .footer-directory>div{min-width:0}footer .footer-directory strong{display
 @media(max-width:620px){.camp-registration-options,.camp-registration-options.compact{width:100%;gap:10px;flex-direction:column}.camp-registration-options>button,.camp-registration-options>a,.heart-camp-actions .camp-registration-options.compact>button,.heart-camp-actions .camp-registration-options.compact>a{width:100%;min-height:50px;padding:13px 16px;justify-content:space-between}.camp-form-backdrop{padding:12px}.camp-form-modal{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:38px 22px 25px}.camp-form-row{grid-template-columns:1fr}.camp-form-modal>h2{font-size:40px}}
 
 /* Keep the SEO directory readable: one clear, tappable link per row. */
-footer .footer-directory{display:grid!important;grid-template-columns:1.4fr 1fr 1fr!important;grid-column:1/-1!important}
+footer .footer-directory{display:grid!important;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr)!important;grid-column:1/-1!important}
 footer .footer-directory>div>nav{display:grid!important;grid-template-columns:1fr!important;gap:9px!important}
 footer .footer-directory>div>nav>a{display:block!important;margin:0!important;white-space:normal!important}
 @media(max-width:820px){footer .footer-directory{grid-template-columns:1fr 1fr!important}}
