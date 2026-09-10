@@ -3,6 +3,7 @@ import {notFound} from "next/navigation";
 import {getLibraryTopic,libraryTopics} from "../data";
 import ConsultationActions from "../../ConsultationActions";
 import {pageMetadata} from "../../seo";
+import SiteFooter from "../../SiteFooter";
 
 export function generateStaticParams(){return libraryTopics.map(({slug})=>({slug}))}
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const topic=getLibraryTopic(slug);return topic?pageMetadata({title:topic.title,description:topic.summary,path:`/health-library/${topic.slug}`,type:"article"}):{title:"Article not found",robots:{index:false,follow:false}}}
@@ -14,4 +15,5 @@ export default async function LibraryArticle({params}:{params:Promise<{slug:stri
   </article>
   <section className="related-articles"><div><p className="section-label"><span>More</span> Health library</p><h2>Continue reading</h2></div><div>{related.map(item=><a href={`/health-library/${item.slug}`} key={item.slug}><span>{item.category}</span><strong>{item.title}</strong><small>{item.readTime} →</small></a>)}</div></section>
   <ConsultationActions tone="ivory" />
+  <SiteFooter />
 </main>}

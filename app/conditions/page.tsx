@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { conditionGroups } from "./data";
-import SocialFollow from "../SocialFollow";
+import SiteFooter from "../SiteFooter";
 import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
@@ -15,5 +15,5 @@ export default function ConditionsHub(){return <main className="conditions-hub">
   <section className="group-list">{conditionGroups.map((group,index)=><article className={`condition-group condition-group-tone-${index+1}`} key={group.title}><div className="group-image"><img src={groupImages[index]} alt="" /></div><div className="group-heading"><h2>{group.title}</h2><p>{group.description}</p></div><div className="group-items">{group.items.map(([name,slug])=>slug?<a href={`/conditions/${slug}`} key={name}><span>{name}</span><b>View guide →</b></a>:<div key={name}><span>{name}</span><small>Assessed within Internal Medicine</small></div>)}</div></article>)}</section>
   <section className="hub-guides"><div><p className="eyebrow"><span/> In-depth guides</p><h2>People-first information for important conditions.</h2></div><p>Each guide explains symptoms, risk factors, assessment, possible investigations, treatment principles, lifestyle considerations and urgent warning signs. The content avoids repetitive location-keyword pages.</p></section>
   <ConsultationActions tone="navy" />
-  <footer><div className="footer-main"><a className="brand footer-brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><p>Evidence-based adult medical care in Bhiwadi.</p></div><div className="footer-links"><div><strong>Explore</strong><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a><a href="/conditions">Conditions</a><a href="/health-library">Health library</a></div><div><strong>Important</strong><a href="/policies#medical-disclaimer">Medical disclaimer</a><a href="/#contact">Clinic information</a><a href="/book-appointment">Appointments</a></div></div><SocialFollow/><small>© {new Date().getFullYear()} Dr. Kulwant Yadav. Information is educational and does not replace an individual consultation.</small></footer>
+  <SiteFooter />
 </main>}

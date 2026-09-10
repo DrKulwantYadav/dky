@@ -3,6 +3,7 @@ import {notFound} from "next/navigation";
 import {getServiceProfile,serviceProfiles} from "../data";
 import ConsultationActions from "../../ConsultationActions";
 import {pageMetadata} from "../../seo";
+import SiteFooter from "../../SiteFooter";
 
 export function generateStaticParams(){return serviceProfiles.map(({id})=>({slug:id}))}
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const service=getServiceProfile(slug);return service?pageMetadata({title:`${service.title} in Bhiwadi`,description:service.lead,path:`/services/${service.id}` }):{title:"Service not found",robots:{index:false,follow:false}}}
@@ -17,4 +18,5 @@ export default async function ServicePage({params}:{params:Promise<{slug:string}
   <section className="service-related"><div><p className="section-label"><span>Explore</span> Other services</p><h2>Related clinical services</h2></div><div>{related.map(item=><a href={`/services/${item.id}`} key={item.id}><span>{item.n}</span><strong>{item.title}</strong><small>View details →</small></a>)}</div></section>
   <ConsultationActions tone="navy" />
   <section className="medical-disclaimer"><strong>Important information</strong><p>Service availability, fees, diagnostic location and reporting arrangements must be confirmed directly with the clinic. This page provides general information and does not replace individual medical assessment.</p></section>
+  <SiteFooter />
 </main>}

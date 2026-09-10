@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SocialFollow from "../SocialFollow";
+import SiteFooter from "../SiteFooter";
 import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
@@ -29,5 +29,5 @@ export default function ServicesPage(){return <main className="services-page">
   <section className="diagnostic-note"><div><p className="eyebrow"><span/> A note about diagnostics</p><h2>A test is useful when it changes a decision.</h2></div><p>ECG and echocardiography do not replace clinical assessment, and a normal result may not exclude every condition. Availability and reporting responsibility should be confirmed at the time of booking. Urgent symptoms should be assessed in an emergency setting rather than delayed for a routine diagnostic appointment.</p></section>
   <ConsultationActions tone="navy" />
   <section className="medical-disclaimer"><strong>Important information</strong><p>Service availability, appointment timings, fees, diagnostic location and reporting arrangements must be confirmed directly with the clinic. Website information does not replace individual medical assessment.</p></section>
-  <footer><div className="footer-main"><a className="brand footer-brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><p>Evidence-based adult medical care in Bhiwadi.</p></div><div className="footer-links"><div><strong>Explore</strong><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a><a href="/conditions">Conditions</a><a href="/services">Services</a></div><div><strong>Important</strong><a href="/policies#medical-disclaimer">Medical disclaimer</a><a href="/#contact">Clinic information</a><a href="/#appointment">Appointments</a></div></div><SocialFollow/><small>© {new Date().getFullYear()} Dr. Kulwant Yadav. Information is educational and does not replace an individual consultation.</small></footer>
+  <SiteFooter />
 </main>}

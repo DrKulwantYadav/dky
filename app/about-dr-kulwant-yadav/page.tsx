@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SocialFollow from "../SocialFollow";
+import SiteFooter from "../SiteFooter";
 import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
@@ -44,6 +44,6 @@ export default function AboutPage() {
 
     <ConsultationActions tone="teal" />
 
-    <footer><div className="footer-main"><a className="brand footer-brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><p>Evidence-based adult medical care in Bhiwadi.</p></div><div className="footer-links"><div><strong>Profile</strong><a href="#philosophy">Clinical philosophy</a><a href="#qualifications">Qualifications</a><a href="#clinical-focus">Clinical focus</a><a href="#practice">Practice details</a></div><div><strong>Website</strong><a href="/">Home</a><a href="/#conditions">Conditions</a><a href="/health-library">Health library</a><a href="/policies">Policies</a></div></div><SocialFollow/><small>© {new Date().getFullYear()} Dr. Kulwant Yadav. Information is educational and does not replace an individual medical consultation.</small></footer>
+    <SiteFooter />
   </main>;
 }

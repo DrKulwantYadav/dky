@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AppointmentForm from "./AppointmentForm";
-import SocialFollow from "../SocialFollow";
+import SiteFooter from "../SiteFooter";
 import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
@@ -14,5 +14,5 @@ export default function BookAppointmentPage(){return <main className="booking-pa
     <AppointmentForm/>
   </section>
   <ConsultationActions tone="ivory" />
-  <footer><div className="footer-main"><a className="brand footer-brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><p>Evidence-based adult medical care in Bhiwadi.</p></div><div className="footer-links"><div><strong>Explore</strong><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a></div><div><strong>Privacy</strong><a href="/policies#privacy">Privacy policy</a><a href="/policies#cancellation">Cancellation policy</a><a href="/policies#medical-disclaimer">Medical disclaimer</a></div></div><SocialFollow/><small>© {new Date().getFullYear()} Dr. Kulwant Yadav. An appointment request is not confirmed until the clinic responds.</small></footer>
+  <SiteFooter />
 </main>}

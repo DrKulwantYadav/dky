@@ -733,6 +733,12 @@ footer .footer-social a:hover .footer-social-icon{transform:none}
 @media(max-width:620px){footer .footer-social nav{gap:15px 22px}footer .footer-social a{font-size:13px}}
 @media(max-width:420px){footer .footer-social nav{width:auto}footer .footer-social a{width:auto}}
 
+/* Crawlable, descriptive pathways to every clinical resource. */
+footer .footer-directory{grid-column:1/-1;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;margin:36px 0 28px;padding:28px 0;border-top:1px solid rgba(190,207,211,.24);border-bottom:1px solid rgba(190,207,211,.24)}
+footer .footer-directory>div{min-width:0}footer .footer-directory strong{display:block;margin-bottom:13px;color:#fff;font-size:13px;letter-spacing:.04em}footer .footer-directory nav{display:flex;flex-wrap:wrap;gap:8px 16px}footer .footer-directory a{color:#bac4c3;font-size:13px;line-height:1.45;text-decoration:none}footer .footer-directory a:hover,footer .footer-directory a:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:3px}
+@media(min-width:901px){footer .footer-links{grid-template-columns:repeat(3,minmax(150px,1fr))}}
+@media(max-width:820px){footer .footer-directory{grid-template-columns:1fr 1fr}}@media(max-width:560px){footer .footer-directory{grid-template-columns:1fr;gap:22px;margin-top:28px;padding:24px 0}footer .footer-directory nav{gap:8px 14px}}
+
 /* Image-led condition groups matching the homepage card system */
 .conditions-hub .group-list{display:grid;gap:52px;padding-top:105px;padding-bottom:115px;background:linear-gradient(180deg,#f8faf8 0%,#f2f5f3 100%)}
 .conditions-hub .condition-group{display:grid;grid-template-columns:minmax(250px,28%) minmax(0,1fr);grid-template-rows:auto 1fr;gap:0;height:680px;overflow:hidden;padding:0;border:1px solid rgba(16,42,67,.11);border-radius:20px;background:#fff;box-shadow:0 14px 38px rgba(16,42,67,.08)}

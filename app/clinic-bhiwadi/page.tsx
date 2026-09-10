@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SocialFollow from "../SocialFollow";
+import SiteFooter from "../SiteFooter";
 import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
@@ -31,5 +31,5 @@ export default function ClinicPage(){return <main className="clinic-page">
   <section className="clinic-faq section"><div className="section-label"><span>05</span> Local FAQs</div><div className="faq-grid"><h2>Before you travel.</h2><div>{faqs.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></div></section>
   <ConsultationActions tone="teal" />
   <section className="section outreach-section"><div><p className="section-label"><span>06</span> Clinical affiliations & community outreach</p><h2>Expanding access to preventive and chronic care.</h2></div><div><h3>Honorary Consultant Internal Medicine</h3><p>At Gopinath Hospital, Dr. Yadav supports access to specialised internal medicine care and chronic disease management for the broader community.</p><p>He also helps organise preventive screening initiatives, including advanced FibroScan camps and comprehensive Senior Care Metabolic Shield programs for early disease detection and practical lifestyle intervention.</p></div></section>
-  <footer><div className="footer-main"><a className="brand footer-brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><p>Evidence-based adult medical care in Bhiwadi.</p></div><div className="footer-links"><div><strong>Clinic</strong><a href="#clinic-details">Clinic details</a><a href="#directions">Directions</a><a href="/book-appointment">Book appointment</a></div><div><strong>Explore</strong><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/about-dr-kulwant-yadav">About Dr. Yadav</a></div></div><SocialFollow/><small>© {new Date().getFullYear()} Dr. Kulwant Yadav. Do not travel until the clinic confirms your appointment and location.</small></footer>
+  <SiteFooter />
 </main>}
