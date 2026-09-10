@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/clinic-bhiwadi`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/conditions`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/services`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/research`, changeFrequency: "monthly", priority: 0.85 },
     { url: `${siteUrl}/health-library`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/world-heart-day-free-ecg-camp`, changeFrequency: "yearly", priority: 0.85 },
   ];

@@ -27,7 +27,7 @@ export default function Home() {
     <div className="info-strip"><span>Gopinath Hospital, Bhiwadi · Call or WhatsApp +91 92057 75932</span><strong>Medical emergency? Visit the nearest emergency department.</strong></div>
     <header className="site-header">
       <a className="brand" href="#home"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
-      <nav aria-label="Primary navigation"><a href="#home">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/about-dr-kulwant-yadav#research">Research</a><a href="/health-library">Health Library</a><a href="/clinic-bhiwadi">Contact</a></nav>
+      <nav aria-label="Primary navigation"><a href="#home">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/research">Research</a><a href="/health-library">Health Library</a><a href="/clinic-bhiwadi">Contact</a></nav>
       <div className="header-actions"><a className="call-link" href="tel:+919205775932">☎ Call clinic</a><a className="header-cta" href="/book-appointment">Book appointment</a></div>
     </header>
 
