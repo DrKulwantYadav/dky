@@ -5,7 +5,7 @@ import CampRegistration from "./CampRegistration";
 
 export const metadata: Metadata = pageMetadata({
   title: "Free ECG and Heart Check-up Camp | September 2026",
-  description: "Register for a free ECG and heart check-up on Sundays in September 2026 at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
+  description: "Register for a free ECG and heart check-up on Sundays and World Heart Day, 29 September 2026, at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
   path: "/world-heart-day-free-ecg-camp",
 });
 
@@ -14,6 +14,7 @@ const campHours = [
   ["13", "Sunday", "9:00 am – 1:00 pm"],
   ["20", "Sunday", "9:00 am – 1:00 pm"],
   ["27", "Sunday", "9:00 am – 1:00 pm"],
+  ["29", "Tuesday", "10:00 am – 1:00 pm"],
 ];
 
 const focusedChecks = [
@@ -50,7 +51,7 @@ export default function WorldHeartDayCampPage() {
 
     <section className="heart-camp-hero">
       <div className="heart-camp-copy">
-        <p className="eyebrow"><span/> Free ECG camp · 13 September 2026</p>
+        <p className="eyebrow"><span/> Free ECG camp · 29 September 2026</p>
         <h1>Free ECG &amp;<br/><em>Heart Check-up Camp</em></h1>
         <p>Take a simple, informed step toward understanding your heart health with a focused screening and medical guidance at Gopinath Hospital, Bhiwadi.</p>
         <div className="heart-camp-actions"><CampRegistration compact /></div>
@@ -65,7 +66,7 @@ export default function WorldHeartDayCampPage() {
         </div>
         <div className="heart-date-card">
           <span>Free ECG camp</span>
-          <div className="heart-date-lockup"><strong>13</strong><p><b>September 2026</b></p></div>
+          <div className="heart-date-lockup"><strong>29</strong><p><b>September 2026</b></p></div>
           <div className="heart-date-venue"><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
           <em>Free camp · Prior registration recommended</em>
         </div>
@@ -110,8 +111,8 @@ export default function WorldHeartDayCampPage() {
 
     <section className="heart-register" id="register">
       <p className="eyebrow"><span/> Reserve your place</p>
-      <h2>Join the free camp from <em>13 September.</em></h2>
-      <p>Free check-ups are planned on all four Sundays in September. Registration is recommended because capacity may be limited.</p>
+      <h2>Join the free camp <em>this September.</em></h2>
+      <p>Free check-ups are planned on all four Sundays in September and on World Heart Day, Tuesday 29 September. Registration is recommended because capacity may be limited.</p>
       <CampRegistration />
       <a className="heart-register-directions" href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a>
     </section>
