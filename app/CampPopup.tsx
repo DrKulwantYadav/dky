@@ -3,27 +3,26 @@
 import { useEffect, useRef, useState } from "react";
 
 const campPage = "/world-heart-day-free-ecg-camp";
-const campDates = [
-  { day: "06", endsAt: "2026-09-06T13:00:00+05:30" },
-  { day: "13", endsAt: "2026-09-13T13:00:00+05:30" },
-  { day: "20", endsAt: "2026-09-20T13:00:00+05:30" },
-  { day: "27", endsAt: "2026-09-27T13:00:00+05:30" },
-];
+const campEndsAt = new Date("2026-09-29T13:00:00+05:30").getTime();
+const screenings = ["ECG", "Framingham Heart Risk", "BP", "RBS"];
 
 export default function CampPopup() {
   const [open, setOpen] = useState(true);
   const [now, setNow] = useState<number | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
-  const nextCamp = now === null ? null : campDates.find((camp) => now <= new Date(camp.endsAt).getTime());
+  const campIsUpcoming = now !== null && now <= campEndsAt;
 
   useEffect(() => {
-    setNow(Date.now());
+    const initialTimer = window.setTimeout(() => setNow(Date.now()), 0);
     const timer = window.setInterval(() => setNow(Date.now()), 60_000);
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
-    if (!open || !nextCamp) return;
+    if (!open || !campIsUpcoming) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -38,17 +37,17 @@ export default function CampPopup() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [open, nextCamp]);
+  }, [open, campIsUpcoming]);
 
-  if (!open || !nextCamp) return null;
+  if (!open || !campIsUpcoming) return null;
 
-  const registrationLink = `https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20free%20ECG%20and%20heart%20check-up%20camp%20on%20${nextCamp.day}%20September%202026.`;
+  const registrationLink = "https://wa.me/919205775932?text=I%20would%20like%20to%20register%20for%20the%20World%20Heart%20Day%20Mega%20Screening%20on%2029%20September%202026.";
 
   return <div className="camp-popup-backdrop" role="presentation" onMouseDown={(event) => {
     if (event.target === event.currentTarget) setOpen(false);
   }}>
     <section className="camp-popup" role="dialog" aria-modal="true" aria-labelledby="camp-popup-title" aria-describedby="camp-popup-description">
-      <button ref={closeButton} className="camp-popup-close" type="button" onClick={() => setOpen(false)} aria-label="Close free ECG camp announcement">×</button>
+      <button ref={closeButton} className="camp-popup-close" type="button" onClick={() => setOpen(false)} aria-label="Close World Heart Day announcement">×</button>
       <div className="camp-popup-photo">
         <img src="/dr-kulwant-yadav-portrait.png" alt="Dr. Kulwant Yadav, Consultant Internal Medicine"/>
         <div className="camp-popup-doctor">
@@ -58,9 +57,10 @@ export default function CampPopup() {
       </div>
       <div className="camp-popup-copy">
         <p>Free camp · September 2026</p>
-        <h2 id="camp-popup-title">Free ECG &amp;<br/>Heart Check-up Camp</h2>
-        <div className="camp-popup-next-date" aria-label={`Next camp is Sunday ${nextCamp.day} September`}><small>Next camp</small><strong>Sunday</strong><span>{nextCamp.day}</span><b>September</b></div>
-        <p id="camp-popup-description">9:00 am–1:00 pm at Gopinath Hospital, Bhiwadi. Prior registration is recommended.</p>
+        <h2 id="camp-popup-title">World Heart Day<br/>Mega Screening</h2>
+        <div className="camp-popup-screenings" aria-label="Screenings included">{screenings.map((screening) => <span key={screening}>{screening}</span>)}</div>
+        <div className="camp-popup-next-date" aria-label="Tuesday, 29 September 2026"><small>World Heart Day</small><strong>Tuesday</strong><span>29</span><b>September 2026</b></div>
+        <p id="camp-popup-description">10:00 am–1:00 pm at Gopinath Hospital, Bhiwadi. Prior registration is recommended.</p>
         <div className="camp-popup-actions">
           <a href={campPage}>View camp details</a>
           <a href={registrationLink} target="_blank" rel="noopener noreferrer">Register free ↗</a>
