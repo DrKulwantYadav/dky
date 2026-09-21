@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
 import CampRegistration from "./CampRegistration";
+import styles from "./camp.module.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Free ECG and Heart Check-up Camp | September 2026",
@@ -68,7 +69,7 @@ const coreNumbers = [
 ];
 
 export default function WorldHeartDayCampPage() {
-  return <main className="heart-camp-page">
+  return <main className={`heart-camp-page ${styles.page}`}>
     <div className="info-strip"><span>Free heart-health camp · September 2026</span><strong>Free ECG &amp; heart check-up</strong></div>
     <header className="site-header">
       <a className="brand" href="/"><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
