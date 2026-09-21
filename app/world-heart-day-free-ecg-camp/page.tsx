@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
 import CampRegistration from "./CampRegistration";
+import AscvdRiskCalculator from "./AscvdRiskCalculator";
 import styles from "./camp.module.css";
 
 export const metadata: Metadata = pageMetadata({
@@ -122,6 +123,8 @@ export default function WorldHeartDayCampPage() {
       <h2>Don&apos;t Miss a Beat</h2>
       <p>In 2026, we will continue the momentum of &lsquo;Don&apos;t Miss a Beat&rsquo;, raising awareness of the world&apos;s number one killer and highlighting the importance of recognising the signs and symptoms of cardiovascular disease (CVD).</p>
     </section>
+
+    <AscvdRiskCalculator />
 
     <section className="heart-numbers" id="know-your-numbers" aria-labelledby="heart-numbers-title">
       <div className="heart-numbers-heading">
