@@ -4,8 +4,8 @@ import ConsultationActions from "../ConsultationActions";
 import { pageMetadata } from "../seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Doctor Profile, Qualifications and Experience",
-  description: "Learn about Dr. Kulwant Yadav’s Internal Medicine qualifications, clinical philosophy, critical-care background, certifications and clinical focus in Bhiwadi.",
+  title: "Dr. Kulwant Yadav | Internal Medicine Physician in Bhiwadi",
+  description: "Learn about Dr. Kulwant Yadav, Consultant in Internal Medicine in Bhiwadi, including his qualifications, clinical experience, research interests and practice at Gopinath Hospital.",
   path: "/about-dr-kulwant-yadav",
 });
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
     </header>
 
     <section className="about-hero">
-      <div className="about-hero-copy"><a className="back-link" href="/">← Back to home</a><p className="eyebrow"><span/> About Dr. Kulwant Yadav</p><h1>Internal medicine with a <em>whole-person perspective.</em></h1><p>Dr. Kulwant Yadav is a Consultant in Internal Medicine serving adults in Bhiwadi. His work brings together general medicine, chronic disease care, emergency assessment and critical-care experience to help patients understand complex or overlapping health concerns.</p><div className="about-credentials"><span>MBBS</span><span>DNB General Medicine</span><span>FRCEM (Primary)</span><span>DCMH, NIMHANS</span></div></div>
+      <div className="about-hero-copy"><a className="back-link" href="/">← Back to home</a><p className="eyebrow"><span/> About Dr. Kulwant Yadav</p><h1>Dr. Kulwant Yadav, <em>Consultant in Internal Medicine.</em></h1><p>Serving adults in Bhiwadi with an Internal Medicine approach that brings together general medicine, chronic disease care, emergency assessment and critical-care experience.</p><div className="about-credentials"><span>MBBS</span><span>DNB General Medicine</span><span>FRCEM (Primary)</span><span>DCMH, NIMHANS</span></div></div>
       <div className="about-hero-photo"><img src="/dr-kulwant-yadav-clinic.png" alt="Dr. Kulwant Yadav, Consultant in Internal Medicine"/></div>
     </section>
 

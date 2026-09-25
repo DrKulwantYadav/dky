@@ -4,8 +4,8 @@ import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Research and Academic Contributions",
-  description: "Explore Dr. Kulwant Yadav's clinical research, peer-reviewed publications and DNB thesis on critical care, metabolic liver disease and cardiovascular health.",
+  title: "Research and Publications",
+  description: "Explore research, peer-reviewed publications and academic work associated with Dr. Kulwant Yadav across Internal Medicine, metabolic health and related clinical topics.",
   path: "/research",
 });
 
@@ -20,7 +20,7 @@ export default function ResearchPage() {
     <div className="info-strip"><span>Research and academic contributions · Internal Medicine</span><strong>For a medical emergency, visit the nearest emergency department.</strong></div>
     <header className="site-header"><a className="brand" href="/"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a><nav aria-label="Research navigation"><a href="/">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/health-library">Health library</a></nav><a className="header-cta" href="/book-appointment">Book appointment</a></header>
 
-    <section className="research-hero"><div><a className="back-link" href="/">← Back to home</a><p className="eyebrow"><span/> Research and academic contributions</p><h1>Clinical questions, pursued with <em>rigour and purpose.</em></h1><p>Dr. Kulwant Yadav is committed to advancing medical science and improving patient outcomes through clinically relevant research. His academic work connects evidence-based Internal Medicine, critical-care interventions and the cardiovascular and hepatic implications of metabolic disease.</p></div><div className="research-hero-visual"><img src="/research-hero-dr-kulwant.png" alt="Dr. Kulwant Yadav reviewing medical research at his desk"/><aside><span>Academic focus</span><strong>Research that connects bedside decisions with better evidence.</strong><small>Published work, ongoing clinical research and postgraduate scholarship.</small></aside></div></section>
+    <section className="research-hero"><div><a className="back-link" href="/">← Back to home</a><p className="eyebrow"><span/> Research and academic contributions</p><h1>Research and <em>academic contributions.</em></h1><p>Dr. Kulwant Yadav is committed to advancing medical science and improving patient outcomes through clinically relevant research. His academic work connects evidence-based Internal Medicine, critical-care interventions and the cardiovascular and hepatic implications of metabolic disease.</p></div><div className="research-hero-visual"><img src="/research-hero-dr-kulwant.png" alt="Dr. Kulwant Yadav reviewing medical research at his desk"/><aside><span>Academic focus</span><strong>Research that connects bedside decisions with better evidence.</strong><small>Published work, ongoing clinical research and postgraduate scholarship.</small></aside></div></section>
 
     <section className="research-introduction section"><div><p className="section-label">Research profile</p><h2>Evidence should make care <em>clearer, safer and more practical.</em></h2></div><div><p>Clinical research is most useful when it answers a meaningful question: how a treatment performs in routine practice, how a high-risk procedure can be safer, or how connected metabolic factors affect long-term health. Dr. Yadav's work is shaped by those questions.</p><p>This page brings together current research activity, peer-reviewed publications and postgraduate academic work. It is intended for patients, colleagues and collaborators who would like to understand the academic interests that inform his wider clinical perspective.</p></div></section>
 
