@@ -8,9 +8,9 @@ function SocialIcon({ name }: { name: SocialName }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path className="google-blue" d="M21.6 12.2c0-.7-.1-1.5-.2-2.2H12v4h5.4a4.7 4.7 0 0 1-2 3v2.6h3.3c1.9-1.8 2.9-4.4 2.9-7.4Z"/><path className="google-green" d="M12 22c2.7 0 5-.9 6.7-2.4L15.4 17c-.9.6-2.1 1-3.4 1a5.9 5.9 0 0 1-5.5-4.1H3.1v2.7A10 10 0 0 0 12 22Z"/><path className="google-yellow" d="M6.5 13.9a6 6 0 0 1 0-3.8V7.4H3.1a10 10 0 0 0 0 9.2l3.4-2.7Z"/><path className="google-red" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.8A9.7 9.7 0 0 0 12 2a10 10 0 0 0-8.9 5.4l3.4 2.7A5.9 5.9 0 0 1 12 6Z"/></svg>;
 }
 
-export default function SocialFollow() {
-  return <div className="footer-social" aria-label="Follow Dr. Kulwant Yadav">
-    <strong>Follow Dr. Kulwant Yadav</strong>
+export default function SocialFollow({ reviewed = true, language = "en" }: { reviewed?: boolean; language?: "en" | "hi" }) {
+  return <div className="footer-social" aria-label={language === "hi" ? "डॉ. कुलवंत यादव को फ़ॉलो करें" : "Follow Dr. Kulwant Yadav"}>
+    <strong>{language === "hi" ? "डॉ. कुलवंत यादव को फ़ॉलो करें" : "Follow Dr. Kulwant Yadav"}</strong>
     <nav>
       <a className="social-instagram" href="https://www.instagram.com/drkulwantyadavmedicine?igsh=MTh6cjJvMWV5NGZvOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><span className="footer-social-icon"><SocialIcon name="instagram"/></span>Instagram</a>
       <a className="social-youtube" href="https://youtube.com/@medicinesquarebydrkulwant?si=Rn9kcmv7AeleTNkF" target="_blank" rel="noopener noreferrer"><span className="footer-social-icon"><SocialIcon name="youtube"/></span>YouTube</a>
@@ -18,6 +18,6 @@ export default function SocialFollow() {
       <a className="social-whatsapp" href="https://wa.me/919205775932" target="_blank" rel="noopener noreferrer"><span className="footer-social-icon"><SocialIcon name="whatsapp"/></span>WhatsApp</a>
       <a className="social-google" href="https://share.google/NRSnun2Z3rW8XpbU5" target="_blank" rel="noopener noreferrer"><span className="footer-social-icon"><SocialIcon name="google"/></span>Google</a>
     </nav>
-    <p className="content-review">Content reviewed by: <strong>Dr. Kulwant Yadav</strong></p>
+    {reviewed && <p className="content-review">Content reviewed by: <strong>Dr. Kulwant Yadav</strong></p>}
   </div>;
 }

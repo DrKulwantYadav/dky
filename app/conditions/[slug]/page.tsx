@@ -5,10 +5,11 @@ import ConsultationActions from "../../ConsultationActions";
 import JsonLd from "../../JsonLd";
 import { breadcrumbSchema, medicalWebPageSchema, pageMetadata } from "../../seo";
 import SiteFooter from "../../SiteFooter";
+import DiabetesPage from "./DiabetesPage";
 
 export function generateStaticParams(){return Object.keys(conditionProfiles).map(slug=>({slug}));}
 const conditionSeo:Record<string,{title:string;description:string}>={
-  diabetes:{title:"Diabetes and High Blood Sugar Care in Bhiwadi",description:"Learn about diabetes symptoms, testing and ongoing management, and when to consult Dr. Kulwant Yadav for diabetes care in Bhiwadi."},
+  diabetes:{title:"Diabetes Care in Bhiwadi | Dr. Kulwant Yadav",description:"Understand diabetes, blood sugar tests and treatment options. Request a consultation with Dr. Kulwant Yadav at Gopinath Hospital, Bhiwadi."},
   hypertension:{title:"High Blood Pressure Care in Bhiwadi",description:"Understand high blood pressure, monitoring, risk factors and treatment principles, and when to consult an Internal Medicine physician in Bhiwadi."},
   "fatty-liver-masld":{title:"Fatty Liver (MASLD) Care in Bhiwadi",description:"Learn about fatty liver disease, metabolic risk, investigations and management with Dr. Kulwant Yadav, Internal Medicine physician in Bhiwadi."},
   "ckm-syndrome":{title:"Heart–Kidney–Metabolic Health (CKM)",description:"Understand how diabetes, weight, blood pressure, heart health and kidney function interact within cardiovascular–kidney–metabolic health."},
@@ -21,11 +22,12 @@ const conditionSeo:Record<string,{title:string;description:string}>={
   asthma:{title:"Asthma Management and Medical Care in Bhiwadi",description:"Learn about asthma symptoms, inhaler treatment, trigger assessment and when respiratory specialist or emergency referral may be required."},
   "indigestion-digestive-problems":{title:"Indigestion and Digestive Problems in Bhiwadi",description:"Learn about acidity, indigestion and common digestive symptoms, including warning signs and when an Internal Medicine assessment is appropriate."},
 };
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const c=conditionProfiles[slug];const seo=conditionSeo[slug];return c?pageMetadata({title:seo?.title||c.title,description:seo?.description||c.short,path:`/conditions/${slug}`,type:"article"}):{title:"Condition guide not found",robots:{index:false,follow:false}}}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const c=conditionProfiles[slug];const seo=conditionSeo[slug];if(!c)return{title:"Condition guide not found",robots:{index:false,follow:false}};const metadata=pageMetadata({title:seo?.title||c.title,description:seo?.description||c.short,path:`/conditions/${slug}`,type:"article"});return slug==="diabetes"?{...metadata,title:{absolute:seo.title}}:metadata}
 const List=({items}:{items:string[]})=><ul>{items.map(item=><li key={item}>{item}</li>)}</ul>;
 
 export default async function ConditionPage({params}:{params:Promise<{slug:string}>}) {
   const {slug}=await params;const c=conditionProfiles[slug];if(!c)notFound();
+  if(slug==="diabetes")return <DiabetesPage/>;
   const seo=conditionSeo[slug];
   return <main className="condition-detail">
     <JsonLd data={[medicalWebPageSchema({name:seo?.title||c.title,description:seo?.description||c.short,path:`/conditions/${slug}`,about:c.title}),breadcrumbSchema([{name:"Home",path:"/"},{name:"Conditions",path:"/conditions"},{name:c.title,path:`/conditions/${slug}`}])]} />
