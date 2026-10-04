@@ -723,7 +723,7 @@ footer .social-google:hover .footer-social-icon{background:#fff;border-color:#ff
 footer .footer-social a:hover .footer-social-icon{transform:translateY(-2px);border-color:currentColor;background:rgba(255,255,255,.11)}
 footer .footer-social a:hover{color:#fff}
 footer .footer-social a:hover .footer-social-icon{background:#fff;border-color:#fff}
-footer .footer-social .social-instagram:hover .footer-social-icon{color:#e1306c}footer .footer-social .social-youtube:hover .footer-social-icon{color:#ff0033}footer .footer-social .social-facebook:hover .footer-social-icon{color:#4f8fe8}footer .footer-social .social-whatsapp:hover .footer-social-icon{color:#25d366}footer .footer-social .social-google:hover .footer-social-icon{color:#fff}
+footer .footer-social .social-instagram:hover .footer-social-icon{color:#e1306c}footer .footer-social .social-youtube:hover .footer-social-icon{color:#ff0033}footer .footer-social .social-facebook:hover .footer-social-icon{color:#4f8fe8}footer .footer-social .social-linkedin:hover .footer-social-icon{color:#0a66c2}footer .footer-social .social-whatsapp:hover .footer-social-icon{color:#25d366}footer .footer-social .social-google:hover .footer-social-icon{color:#fff}
 footer .footer-social .social-youtube:hover .icon-cutout{fill:#fff}
 
 /* Plain social links with hover-only emphasis */
