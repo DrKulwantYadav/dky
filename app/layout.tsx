@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+import "./appointment-modal.css";
 import FloatingWhatsApp from "./FloatingWhatsApp";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import MetaPixel from "@/components/MetaPixel";

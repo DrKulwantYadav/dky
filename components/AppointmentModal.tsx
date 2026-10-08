@@ -49,9 +49,9 @@ export default function AppointmentModal() {
   }, [visible]);
 
   if (!visible) return null;
-  return <div className="appointment-modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) setOpen(false); }}>
-    <section ref={dialog} className="appointment-modal" role="dialog" aria-modal="true" aria-label="Request an appointment">
-      <button ref={closeButton} className="appointment-modal-close" type="button" onClick={() => setOpen(false)} aria-label="Close appointment form">×</button>
+  return <div className="appointment-modal-backdrop" style={{ position: "fixed", inset: 0, zIndex: 1300, display: "grid", placeItems: "center", padding: 8, background: "rgba(7,25,36,.72)" }} role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) setOpen(false); }}>
+    <section ref={dialog} className="appointment-modal" style={{ position: "relative", width: "min(780px,100%)", maxHeight: "calc(100dvh - 16px)", overflowY: "auto", background: "#fff" }} role="dialog" aria-modal="true" aria-label="Request an appointment">
+      <button ref={closeButton} className="appointment-modal-close" style={{ position: "sticky", top: 5, float: "right", zIndex: 2, width: 42, height: 42, margin: "5px 5px -47px 0", borderRadius: "50%", background: "#fff", fontSize: 29 }} type="button" onClick={() => setOpen(false)} aria-label="Close appointment form">×</button>
       <AppointmentForm/>
     </section>
   </div>;
