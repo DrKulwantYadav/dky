@@ -11,7 +11,7 @@ import "./diabetes.css";
 
 type Language = "en" | "hi";
 const phone = "tel:+919205775932";
-const appointmentUrl = "https://www.drkulwantyadav.com/book-appointment";
+const appointmentUrl = "/book-appointment";
 const whatsappMessage = "Hello, I would like to request a diabetes consultation with Dr. Kulwant Yadav. Please share the available appointment timings.";
 const whatsapp = `https://wa.me/919205775932?text=${encodeURIComponent(whatsappMessage)}`;
 

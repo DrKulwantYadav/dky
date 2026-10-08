@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import ConditionCarousel from "./ConditionCarousel";
 import { pageMetadata } from "./seo";
 import SiteFooter from "./SiteFooter";
-import CampPopup from "./CampPopup";
-import WorldHeartCampSection from "./WorldHeartCampSection";
 
 export const metadata: Metadata = pageMetadata({
   title: "Internal Medicine Doctor in Bhiwadi",
@@ -23,11 +21,10 @@ const faqs = [
 
 export default function Home() {
   return <main>
-    <CampPopup />
     <div className="info-strip"><span>Gopinath Hospital, Bhiwadi · Call or WhatsApp +91 92057 75932</span><strong>Medical emergency? Visit the nearest emergency department.</strong></div>
     <header className="site-header">
       <a className="brand" href="#home"><span className="brand-mark">KY</span><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
-      <nav aria-label="Primary navigation"><a href="#home">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/research">Research</a><a href="/health-library">Health Library</a><a href="/clinic-bhiwadi">Contact</a></nav>
+      <nav aria-label="Primary navigation"><a href="#home">Home</a><a href="/about-dr-kulwant-yadav">About</a><a href="/conditions">Conditions</a><a href="/services">Services</a><a href="/research">Research</a><a href="/health-library">Health Library</a><a href="/community-initiatives">Community activities</a><a href="/clinic-bhiwadi">Contact</a></nav>
       <div className="header-actions"><a className="call-link" href="tel:+919205775932">☎ Call clinic</a><a className="header-cta" href="/book-appointment">Book appointment</a></div>
     </header>
 
@@ -44,7 +41,6 @@ export default function Home() {
 
     <section className="section services-section" id="services"><div className="section-label"><span>03</span> Services & diagnostics</div><div className="section-top light-head"><h2>Useful care, <em>clearly coordinated.</em></h2><p>Consultation and follow-up services designed around adult medical needs.</p></div><div className="service-pills">{services.map((s,i)=><div key={s}><span>0{i+1}</span><strong>{s}</strong></div>)}</div><p className="verification-note">* Direct availability, equipment location and reporting arrangements for ECG and echocardiography must be confirmed before booking.</p><a className="text-link" href="/services">Explore all services →</a></section>
 
-    <WorldHeartCampSection />
 
     <section className="about-credentials section" id="about"><div className="approach"><div className="approach-image"><img src="/dr-kulwant-yadav-clinic.png" alt="Dr. Kulwant Yadav in his consultation room"/></div><div className="approach-copy"><div className="section-label"><span>04</span> About Dr. Yadav</div><h2>Careful medicine for <em>complex health.</em></h2><p>Dr. Kulwant Yadav is a Consultant in Internal Medicine serving adults in Bhiwadi. His background spans general medicine, emergency care and critical-care management, with a clinical interest in metabolic, cardiovascular, liver and interconnected chronic conditions.</p><p>His qualifications include MBBS, DNB General Medicine, FRCEM (Primary) and a Diploma in Community Mental Health from NIMHANS. Qualification designations should be checked against original certificates before public launch.</p><a className="text-link" href="/about-dr-kulwant-yadav">View complete profile →</a></div><div className="credentials credentials-inline" id="credentials"><div className="credentials-inline-head"><h3>Education & credentials</h3><p>Formal qualifications supporting a broad internal-medicine practice.</p></div><div className="credential-list"><div className="credential"><b>DNB</b><span><strong>General Medicine</strong><small>NBEMS, New Delhi</small></span></div><div className="credential"><b>FRCEM</b><span><strong>Primary examination</strong><small>Royal College of Emergency Medicine, UK · 2019</small></span></div><div className="credential"><b>DCMH</b><span><strong>Community Mental Health</strong><small>NIMHANS, Bengaluru · 2018</small></span></div><div className="credential"><b>MBBS</b><span><strong>Medicine & Surgery</strong><small>U.P. University of Medical Sciences · 2008</small></span></div></div></div></div></section>
 

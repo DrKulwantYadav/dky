@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import SiteFooter from "../SiteFooter";
 import { pageMetadata } from "../seo";
-import CampRegistration from "./CampRegistration";
 import AscvdRiskCalculator from "./AscvdRiskCalculator";
 import styles from "./camp.module.css";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Free ECG and Heart Check-up Camp | September 2026",
-  description: "Register for a free ECG and heart check-up on Sundays and World Heart Day, 29 September 2026, at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
+  title: "Completed Free ECG and Heart Check-up Camp | September 2026",
+  description: "Information from the completed September 2026 heart-health camp at Gopinath Hospital, Bhiwadi, with Dr. Kulwant Yadav.",
   path: "/world-heart-day-free-ecg-camp",
 });
 
@@ -28,7 +27,7 @@ const focusedChecks = [
   {
     number: "02",
     title: "12-Lead ECG",
-    description: <>Performed using the US FDA-approved <strong>GE MAC 5 A4 system</strong>, featuring the globally recognized <strong>Marquette™ ECG Analysis Algorithm</strong> for accurate diagnosis and rhythm analysis.</>,
+    description: <>A 12-lead ECG records the heart&apos;s electrical activity and can support a clinician&apos;s assessment of rhythm and other findings.</>,
   },
   {
     number: "03",
@@ -71,20 +70,21 @@ const coreNumbers = [
 
 export default function WorldHeartDayCampPage() {
   return <main className={`heart-camp-page ${styles.page}`}>
-    <div className="info-strip"><span>Free heart-health camp · September 2026</span><strong>Free ECG &amp; heart check-up</strong></div>
+    <div className="info-strip"><span>Completed heart-health camp · September 2026</span><strong>Free ECG &amp; heart check-up</strong></div>
+    <div className="heart-completed-notice" role="status">This community health camp has concluded. Thank you to everyone who participated.</div>
     <header className="site-header">
       <a className="brand" href="/"><span><strong>Dr. Kulwant Yadav</strong><small>Consultant Internal Medicine</small></span></a>
-      <nav aria-label="Camp page navigation"><a href="/">Home</a><a href="#campaign">Camp details</a><a href="#know-your-numbers">Know your numbers</a><a href="#register">Register</a></nav>
-      <a className="header-cta" href="#register">Register free</a>
+      <nav aria-label="Camp page navigation"><a href="/">Home</a><a href="#campaign">Camp details</a><a href="#know-your-numbers">Know your numbers</a><a href="/community-initiatives">Community activities</a></nav>
+      <a className="header-cta" href="/community-initiatives/heart-health-september-2026">View Camp Highlights</a>
     </header>
 
     <section className="heart-camp-hero">
       <div className="heart-camp-copy">
-        <p className="eyebrow"><span/> Free ECG camp · 29 September 2026</p>
-        <h1>Discover Your<br/><em>10-Year Heart Risk in Free</em></h1>
+        <p className="eyebrow"><span/> Completed free ECG camp · September 2026</p>
+        <h1>September 2026<br/><em>Heart-Health Camp</em></h1>
         <div className="heart-camp-service-tabs" aria-label="Free screening services"><span>ECG</span><span>Framingham Heart Test</span><span>BP</span><span>RBS</span></div>
-        <p>Take a simple, informed step toward understanding your heart health with a focused screening and medical guidance at Gopinath Hospital, Bhiwadi.</p>
-        <div className="heart-camp-actions"><CampRegistration compact /></div>
+        <p>This original campaign page shares the heart-health information presented for the completed September 2026 initiative at Gopinath Hospital, Bhiwadi.</p>
+        <div className="heart-camp-actions"><a className="primary-button" href="/community-initiatives/heart-health-september-2026">View Camp Highlights →</a><a className="primary-button" href="/book-appointment">Book a Regular Appointment →</a></div>
       </div>
       <aside className="heart-camp-visual" aria-label="Dr. Kulwant Yadav and camp details">
         <div className="heart-portrait-wrap">
@@ -98,7 +98,7 @@ export default function WorldHeartDayCampPage() {
           <span>Free ECG camp</span>
           <div className="heart-date-lockup"><strong>29</strong><p><b>September 2026</b></p></div>
           <div className="heart-date-venue"><small>Venue</small><p>Gopinath Hospital<br/>Bhiwadi, Rajasthan</p></div>
-          <em>Free camp · Prior registration recommended</em>
+          <em>Camp completed</em>
         </div>
       </aside>
     </section>
@@ -107,7 +107,7 @@ export default function WorldHeartDayCampPage() {
       <div className="heart-focused-heading">
         <p className="section-label"><span>Free services</span> What is included</p>
         <h2>A focused check for <em>your heart.</em></h2>
-        <p>To ensure excellent check-up quality, we will use high-end diagnostic equipment rather than conventional camp-level equipment. Each participant will receive the following services completely free of charge:</p>
+        <p>The original campaign described the following screening approach. Confirmed delivered services and highlights can be added to the community initiative page by the clinic.</p>
       </div>
       <div className="heart-focused-grid">
         {focusedChecks.map((check) => <article key={check.number}>
@@ -121,7 +121,7 @@ export default function WorldHeartDayCampPage() {
     <section className="heart-campaign-message" id="campaign">
       <span>Heart-health awareness · 2026</span>
       <h2>Don&apos;t Miss a Beat</h2>
-      <p>In 2026, we will continue the momentum of &lsquo;Don&apos;t Miss a Beat&rsquo;, raising awareness of the world&apos;s number one killer and highlighting the importance of recognising the signs and symptoms of cardiovascular disease (CVD).</p>
+      <p>The 2026 campaign continued the momentum of &lsquo;Don&apos;t Miss a Beat&rsquo;, encouraging awareness of cardiovascular risk and the importance of recognising possible warning signs.</p>
     </section>
 
     <AscvdRiskCalculator />
@@ -144,7 +144,7 @@ export default function WorldHeartDayCampPage() {
     </section>
 
     <section className="heart-prepare">
-      <div><p className="section-label"><span>02</span> Before you visit</p><h2>Bring a few useful details.</h2></div>
+      <div><p className="section-label"><span>02</span> For a future consultation</p><h2>Bring a few useful details.</h2></div>
       <div className="heart-prepare-list"><p><b>Current medicines</b><span>Bring your prescription or an updated medicine list.</span></p><p><b>Previous reports</b><span>Carry earlier ECGs, blood tests or heart-related reports if available.</span></p><p><b>Comfortable clothing</b><span>Wear clothing that allows easy access to the chest, arms and ankles for an ECG.</span></p></div>
     </section>
 
@@ -160,10 +160,10 @@ export default function WorldHeartDayCampPage() {
     </section>
 
     <section className="heart-register" id="register">
-      <p className="eyebrow"><span/> Reserve your place</p>
-      <h2>Join the free camp <em>this September.</em></h2>
-      <p>Free check-ups are planned on all four Sundays in September and on World Heart Day, Tuesday 29 September. Registration is recommended because capacity may be limited.</p>
-      <CampRegistration />
+      <p className="eyebrow"><span/> Camp completed</p>
+      <h2>Explore the <em>camp highlights.</em></h2>
+      <p>This September 2026 camp has concluded. See verified highlights when published, or request a regular consultation for ongoing care.</p>
+      <div className="heart-camp-actions"><a className="primary-button" href="/community-initiatives/heart-health-september-2026">View Camp Highlights →</a><a className="primary-button" href="/book-appointment">Book a Regular Appointment →</a></div>
       <a className="heart-register-directions" href="https://maps.app.goo.gl/W9QHHQxRkA5bGasi7" target="_blank" rel="noopener noreferrer">Get directions ↗</a>
     </section>
 
@@ -181,7 +181,7 @@ export default function WorldHeartDayCampPage() {
           <dl><div><dt>Mobile</dt><dd><a href="tel:+919205775932">+91 92057 75932</a></dd></div><div><dt>Email enquiries</dt><dd><a href="tel:+919205775932">Contact the clinic to confirm</a></dd></div></dl>
         </article>
         <article className="heart-hours-card">
-          <span>Free camp check-up hours</span>
+          <span>Original camp schedule (completed)</span>
           <h3>September 2026</h3>
           <div className="heart-hours-list">{campHours.map(([date, day, time]) => <p key={date}><strong>{date}</strong><span>{day}</span><b>{time}</b></p>)}</div>
         </article>
@@ -189,9 +189,9 @@ export default function WorldHeartDayCampPage() {
     </section>
 
     <section className="heart-final-cta">
-      <p>Four Sundays. One important step for your heart.</p>
-      <h2>Don&apos;t miss the opportunity to get a free ECG check-up.</h2>
-      <CampRegistration compact />
+      <p>Heart health matters beyond the camp.</p>
+      <h2>Need ongoing medical care?</h2>
+      <div className="heart-camp-actions"><a className="primary-button" href="/community-initiatives/heart-health-september-2026">View Camp Highlights →</a><a className="primary-button" href="/book-appointment">Book a Regular Appointment →</a></div>
       <small>For chest pain, severe breathlessness, fainting, stroke symptoms or another sudden serious symptom, visit the nearest emergency department immediately.</small>
     </section>
 

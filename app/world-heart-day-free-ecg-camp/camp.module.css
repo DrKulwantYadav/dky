@@ -1,4 +1,5 @@
 .page .heart-camp-copy h1{max-width:880px;font-size:clamp(51px,6.1vw,88px)}
+.page :global(.heart-completed-notice){padding:14px 24px;text-align:center;background:#e3f0e9;color:#174d3b;font-weight:800}.page :global(.heart-camp-actions){display:flex;gap:12px;flex-wrap:wrap}.page :global(.heart-camp-actions .primary-button){justify-content:center}
 .page .heart-camp-service-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .page .heart-camp-service-tabs span{display:inline-flex;align-items:center;min-height:34px;padding:7px 14px;border:1px solid rgba(255,255,255,.65);border-radius:999px;background:rgba(255,255,255,.12);color:var(--heart-white);font-size:12px;font-weight:800;letter-spacing:.03em}
 .page .heart-camp-service-tabs+ p{margin-top:28px}
