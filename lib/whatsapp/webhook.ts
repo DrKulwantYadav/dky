@@ -1,7 +1,6 @@
 import { createSupabaseAdmin, writeSystemLog } from "./supabase";
 import { normalizeIndianPhone } from "./security";
-import { sendConfirmation, sendHelpMenu, sendShareFollowUp, sendStaffBusyMessage, sendTextMessage } from "./messages";
-import { scheduleWhatsAppFollowUp } from "./qstash";
+import { sendHelpMenu, sendStaffBusyMessage, sendTextMessage } from "./messages";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -49,78 +48,9 @@ async function alreadyProcessed(messageId: string) {
   return Boolean(data?.length);
 }
 
-async function register(message: JsonRecord, phone: string, registration: NonNullable<ReturnType<typeof parseFlowRegistration>>) {
-  const supabase = createSupabaseAdmin();
-  const { data: camp } = await supabase.from("camps").select("id").eq("active", true).eq("registration_open", true).order("start_date").limit(1).maybeSingle();
-  if (!camp) throw new Error("No active camp is configured");
-
-  const { data: patient, error: patientError } = await supabase
-    .from("patients")
-    .upsert({
-      full_name: registration.name,
-      phone,
-      country_code: "+91",
-      age: registration.age,
-      source: "Meta Ads",
-      campaign_name: "Free ECG Camp",
-      landing_page: "/world-heart-day-free-ecg-camp",
-      last_contact_at: new Date().toISOString(),
-    }, { onConflict: "phone" })
-    .select("id")
-    .single();
-  if (patientError || !patient) throw new Error(`Patient write failed: ${patientError?.code || "unknown"}`);
-
-  const { data: campSession } = await supabase.from("camp_sessions").select("id").eq("camp_id", camp.id).eq("session_date", "2026-09-06").maybeSingle();
-  const { data: existing } = await supabase.from("camp_registrations").select("id").eq("patient_id", patient.id).eq("camp_id", camp.id).order("created_at", { ascending: false }).limit(1).maybeSingle();
-
-  let registrationId = existing?.id as string | undefined;
-  if (!registrationId) {
-    const { data: created, error } = await supabase.from("camp_registrations").insert({
-      patient_id: patient.id,
-      camp_id: camp.id,
-      camp_session_id: campSession?.id || null,
-      registration_for: registration.registrationFor,
-      registration_status: "Registered",
-      source: "Meta Ads",
-    }).select("id").single();
-    if (error || !created) throw new Error(`Registration write failed: ${error?.code || "unknown"}`);
-    registrationId = created.id;
-  }
-
-  const result = await sendConfirmation(phone, registration.name);
-  await supabase.from("camp_registrations").update({
-    confirmation_status: "Confirmed",
-    confirmation_template: "whatsapp_free_ecg_confirmation_text_v1",
-    confirmation_sent_at: new Date().toISOString(),
-    confirmed_at: new Date().toISOString(),
-  }).eq("id", registrationId);
-
-  const pendingPayload = {
-    message_id: text(message.id),
-    registration_id: registrationId,
-    phone,
-    due_at: new Date(Date.now() + 60_000).toISOString(),
-    confirmation_message_id: result.messages?.[0]?.id || null,
-  };
-  const { data: pending, error: pendingError } = await supabase
-    .from("system_logs")
-    .insert({ integration: "Meta WhatsApp", event: "follow_up_pending", payload: pendingPayload })
-    .select("id")
-    .single();
-  if (pendingError || !pending) throw new Error(`Follow-up outbox write failed: ${pendingError?.code || "unknown"}`);
-
-  try {
-    const scheduled = await scheduleWhatsAppFollowUp(pending.id);
-    await supabase.from("system_logs").update({
-      payload: { ...pendingPayload, qstash_message_id: scheduled.messageId },
-    }).eq("id", pending.id);
-  } catch (scheduleError) {
-    await supabase.from("system_logs").update({
-      event: "follow_up_schedule_failed",
-      error: scheduleError instanceof Error ? scheduleError.message.slice(0, 500) : "Unknown QStash error",
-    }).eq("id", pending.id);
-    throw scheduleError;
-  }
+async function register(phone: string) {
+  // Legacy WhatsApp flow has no explicit camp/session/slot. Never create an unslotted booking.
+  await sendTextMessage(phone, "Please choose your health camp and arrival window at https://www.drkulwantyadav.com/camps . Your booking is confirmed only after a token appears on that page.", true);
 }
 
 async function handleReply(message: JsonRecord, phone: string) {
@@ -168,7 +98,7 @@ async function handleReply(message: JsonRecord, phone: string) {
     return;
   }
 
-  await sendHelpMenu(phone);
+  await sendHelpMenu(phone, "Health Camps");
   if (pending) await supabase.from("system_logs").update({ event: "follow_up_cancelled_by_reply" }).eq("id", pending.id);
   await writeSystemLog("menu_sent", {
     message_id: text(message.id),
@@ -206,34 +136,35 @@ async function handleMenuSelection(phone: string, optionId: string) {
     case "registration": {
       const { data } = await supabase
         .from("camp_registrations")
-        .select("registration_status,confirmation_status,camp_sessions(session_date),patients!inner(full_name,phone)")
+        .select("participant_name,registration_status,confirmation_status,camp_sessions(session_date),camp_slots(start_time,end_time),patients!inner(full_name,phone)")
         .eq("patients.phone", phone)
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
       const patient = Array.isArray(data?.patients) ? data.patients[0] : data?.patients;
       const session = Array.isArray(data?.camp_sessions) ? data.camp_sessions[0] : data?.camp_sessions;
+      const slot = Array.isArray(data?.camp_slots) ? data.camp_slots[0] : data?.camp_slots;
       if (!data || !patient) {
-        await sendTextMessage(phone, "We could not find a camp registration for this WhatsApp number. You can register here: https://www.drkulwantyadav.com/world-heart-day-free-ecg-camp", true);
+        await sendTextMessage(phone, "We could not find a camp registration for this WhatsApp number. View available camps at https://www.drkulwantyadav.com/camps", true);
         return;
       }
-      await sendTextMessage(phone, `Registration found ✅\n\nPatient: ${patient.full_name}\nStatus: ${data.registration_status}\nConfirmation: ${data.confirmation_status}\nDate: ${session?.session_date || "Sunday, 6 September"}\nTime: 9:00 AM – 1:00 PM`);
+      await sendTextMessage(phone, `Registration found ✅\n\nAttendee: ${data.participant_name || patient.full_name}\nStatus: ${data.registration_status}\nConfirmation: ${data.confirmation_status}\nDate: ${session?.session_date || "Please contact the hospital"}\nArrival window: ${slot?.start_time && slot?.end_time ? `${slot.start_time}–${slot.end_time}` : "Please contact the hospital"}`);
       return;
     }
     case "date_time":
-      await sendTextMessage(phone, "📅 Free ECG & Heart Checkup Camp\nSunday, 6 September\n⏰ 9:00 AM – 1:00 PM");
+      await sendTextMessage(phone, "Current health camp dates and arrival windows are listed at https://www.drkulwantyadav.com/camps", true);
       return;
     case "location":
       await sendTextMessage(phone, "📍 Gopinath Hospital, Bhiwadi\n\nOpen the hospital location: https://www.google.com/maps/search/?api=1&query=Gopinath+Hospital+Bhiwadi", true);
       return;
     case "family":
-      await sendTextMessage(phone, "Register a family member for the Free ECG & Heart Checkup Camp here: https://www.drkulwantyadav.com/world-heart-day-free-ecg-camp", true);
+      await sendTextMessage(phone, "Register a family member at https://www.drkulwantyadav.com/camps . Each attendee receives a separate token.", true);
       return;
     case "share":
-      await sendShareFollowUp(phone);
+      await sendTextMessage(phone, "Share available health camps with family and friends: https://www.drkulwantyadav.com/camps . Each person can choose an arrival window.", true);
       return;
     case "website":
-      await sendTextMessage(phone, "Find complete camp information here: https://www.drkulwantyadav.com/world-heart-day-free-ecg-camp", true);
+      await sendTextMessage(phone, "Find current camp information here: https://www.drkulwantyadav.com/camps", true);
       return;
     case "hospital_team":
       await pauseForStaff(phone, "hospital_team_selected");
@@ -257,7 +188,7 @@ export async function processWebhook(payload: JsonRecord) {
 
         const registration = parseFlowRegistration(message);
         try {
-          if (registration) await register(message, phone, registration);
+          if (registration) await register(phone);
           else await handleReply(message, phone);
           await writeSystemLog("webhook_processed", { message_id: messageId, phone, type: text(message.type) });
         } catch (error) {

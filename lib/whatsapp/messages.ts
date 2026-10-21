@@ -32,6 +32,18 @@ export function sendTextMessage(to: string, body: string, previewUrl = false) {
   });
 }
 
+/** Approved utility template required for proactive camp confirmations. */
+export function sendCampConfirmationTemplate(to: string, details: { attendee: string; campName: string; date: string;
+  startTime: string; endTime: string; venueName: string; venueAddress: string; token: string; bookingReference: string }) {
+  const templateName = process.env.CAMP_WHATSAPP_TEMPLATE_NAME?.trim();
+  if (!templateName) throw new Error("Camp WhatsApp template is not configured");
+  const values = [details.attendee, details.campName, details.date, `${details.startTime}–${details.endTime}`,
+    `${details.venueName}, ${details.venueAddress}`, details.token, details.bookingReference];
+  return send({ to, type: "template", template: { name: templateName,
+    language: { code: process.env.CAMP_WHATSAPP_TEMPLATE_LANGUAGE?.trim() || "en" },
+    components: [{ type: "body", parameters: values.map(value => ({ type: "text", text: value.replace(/[\r\n\t]+/g, " ").slice(0, 200) })) }] } });
+}
+
 export function sendConfirmation(to: string, patientName: string) {
   const safeName = patientName.replace(/[\r\n\t]+/g, " ").trim().slice(0, 80);
   return send({
@@ -55,13 +67,13 @@ export function sendShareFollowUp(to: string) {
   });
 }
 
-export function sendHelpMenu(to: string) {
+export function sendHelpMenu(to: string, heading = "Free ECG Camp") {
   return send({
     to,
     type: "interactive",
     interactive: {
       type: "list",
-      header: { type: "text", text: "Free ECG Camp" },
+      header: { type: "text", text: heading.slice(0, 60) },
       body: { text: "How can we help you?" },
       action: {
         button: "Choose an option",

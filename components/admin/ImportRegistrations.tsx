@@ -3,7 +3,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function ImportRegistrations({ type }: { type: "camp" | "regular" }) {
+export function ImportRegistrations({ type, campId, onImported }: { type: "camp" | "regular"; campId?: string; onImported?: () => void }) {
   const input = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
@@ -14,13 +14,14 @@ export function ImportRegistrations({ type }: { type: "camp" | "regular" }) {
     const file = event.target.files?.[0];
     if (!file) return;
     setUploading(true); setMessage(""); setError(false);
-    const formData = new FormData(); formData.set("file", file); formData.set("type", type);
+    const formData = new FormData(); formData.set("file", file); formData.set("type", type); if (campId) formData.set("campId", campId);
     try {
       const response = await fetch("/api/admin/import", { method: "POST", body: formData });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Import failed.");
       setMessage(`${result.imported} registration${result.imported === 1 ? "" : "s"} imported successfully.`);
       router.refresh();
+      onImported?.();
     } catch (uploadError) {
       setError(true); setMessage(uploadError instanceof Error ? uploadError.message : "Import failed.");
     } finally { setUploading(false); event.target.value = ""; }

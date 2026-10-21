@@ -16,17 +16,11 @@ export async function POST(request: Request) {
     const type = formData.get("type");
     if (!(file instanceof File)) return NextResponse.json({ error: "Choose a CSV or Excel .xlsx file." }, { status: 400 });
     if (type !== "camp" && type !== "regular") return NextResponse.json({ error: "Invalid registration type." }, { status: 400 });
+    if (type === "camp") return NextResponse.json({ error: "Camp imports cannot assign an arrival window or enforce capacity. Use the scheduled registration flow." }, { status: 409 });
     if (file.size > 2 * 1024 * 1024) return NextResponse.json({ error: "The file must be 2 MB or smaller." }, { status: 400 });
 
     const imported = await parseRegistrationFile(file);
     const supabase = await createClient();
-    let campId: string | null = null;
-    if (type === "camp") {
-      const { data: camp } = await supabase.from("camps").select("id").eq("active", true).eq("registration_open", true).order("start_date", { ascending: false }).limit(1).maybeSingle();
-      if (!camp) return NextResponse.json({ error: "Open a camp before importing camp registrations." }, { status: 400 });
-      campId = camp.id;
-    }
-
     const phones = imported.map(({ phone }) => phone);
     const { data: existing, error: existingError } = await supabase.from("patients").select("id,phone").in("phone", phones);
     if (existingError) throw new Error("Existing patient records could not be checked.");
@@ -48,20 +42,13 @@ export async function POST(request: Request) {
     const patientByPhone = new Map((patients || []).map((patient) => [patient.phone, patient.id]));
     if (patientByPhone.size !== imported.length) throw new Error("Some patient records could not be matched after import.");
 
-    let registrationError: { message: string } | null = null;
-    if (type === "camp") {
-      const result = await supabase.from("camp_registrations").insert(imported.map(({ phone }) => ({ patient_id: patientByPhone.get(phone), camp_id: campId, registration_for: "self", registration_status: "Registered", source: "Other" })));
-      registrationError = result.error;
-    } else {
-      const result = await supabase.from("regular_registrations").insert(imported.map(({ phone }) => ({ patient_id: patientByPhone.get(phone), consultation_type: "Imported registration", registration_status: "New", source: "Other" })));
-      registrationError = result.error;
-    }
+    const { error: registrationError } = await supabase.from("regular_registrations").insert(imported.map(({ phone }) => ({ patient_id: patientByPhone.get(phone), consultation_type: "Imported registration", registration_status: "New", source: "Other" })));
     if (registrationError) {
       console.error("Registration import registration save failed", registrationError);
       throw new Error(`Registration records could not be saved: ${registrationError.message}`);
     }
 
-    await supabase.from("admin_activity_logs").insert({ admin_id: admin.user.id, action: `${type === "camp" ? "Camp" : "Regular"} registrations imported`, metadata: { rows: imported.length, file: file.name } });
+    await supabase.from("admin_activity_logs").insert({ admin_id: admin.user.id, action: "Regular registrations imported", metadata: { rows: imported.length, file: file.name } });
     return NextResponse.json({ ok: true, imported: imported.length });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "The import could not be completed." }, { status: 400 });
