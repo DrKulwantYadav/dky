@@ -1,30 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import cloudinaryLoader from "@/lib/cloudinary-loader";
 
 export type ListingItem = { id: string; title: string; slug: string; summary: string; topic: string; status: string; date: string; year: string; venue: string; cover: string; alt: string; registration: string };
 
+const fibroscanPromotionEndsAt = new Date("2026-10-31T00:00:00+05:30").getTime();
+
 export default function InitiativeListing({ items }: { items: ListingItem[] }) {
+  const [showFibroscanCamp, setShowFibroscanCamp] = useState(false);
+  useEffect(() => {
+    const reveal = window.setTimeout(() => setShowFibroscanCamp(Date.now() < fibroscanPromotionEndsAt), 0);
+    const expire = window.setTimeout(() => setShowFibroscanCamp(false), Math.max(0, fibroscanPromotionEndsAt - Date.now()));
+    return () => { window.clearTimeout(reveal); window.clearTimeout(expire); };
+  }, []);
   const [year, setYear] = useState("");
   const [topic, setTopic] = useState("");
   const [status, setStatus] = useState("");
-  const years = [...new Set(items.map(x => x.year).filter(Boolean))].sort().reverse();
-  const topics = [...new Set(items.map(x => x.topic).filter(Boolean))].sort();
+  const years = [...new Set([...items.map(x => x.year).filter(Boolean), ...(showFibroscanCamp ? ["2026"] : [])])].sort().reverse();
+  const topics = [...new Set([...items.map(x => x.topic).filter(Boolean), ...(showFibroscanCamp ? ["Liver Health"] : [])])].sort();
   const visible = items.filter(x => (!year || x.year === year) && (!topic || x.topic === topic) && (!status || x.status === status));
   const upcoming = visible.filter(x => x.status === "Upcoming");
   const past = visible.filter(x => x.status === "Completed");
+  const ongoingVisible = showFibroscanCamp && (!year || year === "2026") && (!topic || topic === "Liver Health") && (!status || status === "Ongoing");
   return <>
     <form className="community-filters" onSubmit={e => e.preventDefault()} aria-label="Filter community activities">
       <label>Year<select value={year} onChange={e => setYear(e.target.value)}><option value="">All years</option>{years.map(x => <option key={x}>{x}</option>)}</select></label>
       <label>Health topic<select value={topic} onChange={e => setTopic(e.target.value)}><option value="">All topics</option>{topics.map(x => <option key={x}>{x}</option>)}</select></label>
-      <label>Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="">All statuses</option><option>Upcoming</option><option>Completed</option></select></label>
+      <label>Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="">All statuses</option><option>Upcoming</option>{showFibroscanCamp && <option>Ongoing</option>}<option>Completed</option></select></label>
       <button type="button" onClick={() => { setYear(""); setTopic(""); setStatus(""); }}>Clear filters</button>
     </form>
-    {!visible.length ? <div className="community-empty"><span aria-hidden="true">✦</span><h2>No activities found</h2><p>Try another year, topic, or status. New community activities will appear here when published.</p></div> : <>
+    {!visible.length && !ongoingVisible ? <div className="community-empty"><span aria-hidden="true">✦</span><h2>No activities found</h2><p>Try another year, topic, or status. New community activities will appear here when published.</p></div> : <>
       {upcoming.length > 0 && <section className="community-list-section"><div className="community-section-head"><span>What&apos;s ahead</span><h2>Upcoming initiatives</h2></div><div className="community-card-grid">{upcoming.map(item => <Card key={item.id} item={item}/>)}</div></section>}
+      {ongoingVisible && <section className="community-list-section" aria-labelledby="ongoing-initiatives-title"><div className="community-section-head"><span>Current camp</span><h2 id="ongoing-initiatives-title">Ongoing initiatives</h2></div><a className="community-ongoing-link" href="https://www.drkulwantyadav.com/camps/fibroscan-camp-oct-29"><Image className="community-ongoing-image" src="/carousel-fatty-liver.png" alt="Illustration of a liver" width={120} height={120} sizes="(max-width: 700px) 64px, 110px"/><span className="community-ongoing-copy"><span className="community-ongoing-tag">Liver Health · FibroScan</span><strong>FibroScan health camp</strong><span>Gopinath Hospital, Bhiwadi · View camp details and venue</span></span><span className="community-ongoing-arrow" aria-hidden="true">→</span></a></section>}
       {past.length > 0 && <section className="community-list-section"><div className="community-section-head"><span>From the community</span><h2>Past initiatives</h2></div><div className="community-card-grid">{past.map(item => <Card key={item.id} item={item}/>)}</div></section>}
     </>}
   </>;

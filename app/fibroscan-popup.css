@@ -1,0 +1,21 @@
+.fibroscan-popup-backdrop{position:fixed;inset:0;z-index:1400;display:grid;place-items:center;padding:18px;background:rgba(8,29,45,.72);backdrop-filter:blur(5px)}
+.fibroscan-popup{position:relative;display:grid;grid-template-columns:minmax(270px,.85fr) minmax(0,1.15fr);width:min(900px,100%);max-height:calc(100dvh - 36px);overflow-y:auto;background:#faf9f6;color:#102a43;box-shadow:0 26px 80px rgba(0,0,0,.28)}
+.fibroscan-popup-close{position:absolute;z-index:2;top:14px;right:14px;display:grid;place-items:center;width:42px;height:42px;border:1px solid #bbcec8;border-radius:50%;background:#fff;color:#102a43;font:inherit;font-size:27px;cursor:pointer}
+.fibroscan-popup-close:focus-visible,.fibroscan-popup-link:focus-visible{outline:3px solid #1e7778;outline-offset:3px}
+.fibroscan-popup-portrait{position:relative;min-height:530px;overflow:hidden;background:#dfece8}
+.fibroscan-popup-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.fibroscan-popup-portrait:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,rgba(8,29,45,.82))}
+.fibroscan-popup-portrait>span{position:absolute;z-index:1;left:28px;right:20px;bottom:27px;color:#fff;font-family:var(--font-display);font-size:28px;line-height:1.1}
+.fibroscan-popup-portrait small{display:block;margin-top:7px;font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.fibroscan-popup-content{display:flex;flex-direction:column;padding:clamp(42px,5vw,66px) clamp(30px,5vw,58px) 46px}
+.fibroscan-popup-eyebrow{margin:0 0 16px;color:#1e7778;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.fibroscan-popup h2{margin:0;font-family:var(--font-display);font-size:clamp(38px,4.5vw,57px);line-height:1.05}
+.fibroscan-popup-content>p:not(.fibroscan-popup-eyebrow){margin:20px 0;color:#4e6470;font-size:15px;line-height:1.6}
+.fibroscan-popup-details{margin:13px 0 28px;border-top:1px solid #d5ded9}
+.fibroscan-popup-details div{display:grid;grid-template-columns:75px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #d5ded9}
+.fibroscan-popup-details dt{color:#1e7778;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.fibroscan-popup-details dd{margin:0;font-size:14px;font-weight:700}
+.fibroscan-popup-link{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:54px;margin-top:auto;padding:13px 18px;background:#102a43;color:#fff;font-size:15px;font-weight:800;text-decoration:none}
+.fibroscan-popup-link:hover{background:#1e7778}
+@media(max-width:700px){.fibroscan-popup{grid-template-columns:1fr}.fibroscan-popup-portrait{min-height:0;height:225px}.fibroscan-popup-portrait>span{left:21px;bottom:17px;font-size:21px}.fibroscan-popup-portrait small{font-size:9px}.fibroscan-popup-content{padding:27px 24px 28px}.fibroscan-popup h2{font-size:clamp(34px,8vw,45px)}.fibroscan-popup-content>p:not(.fibroscan-popup-eyebrow){margin:13px 0}.fibroscan-popup-details{margin:8px 0 19px}}
+@media(max-width:390px){.fibroscan-popup-backdrop{padding:8px}.fibroscan-popup{max-height:calc(100dvh - 16px)}.fibroscan-popup-portrait{height:175px}.fibroscan-popup-content{padding:20px}.fibroscan-popup h2{font-size:32px}}
