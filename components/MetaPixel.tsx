@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
-const META_PIXEL_ID = "1056684433925051";
+const META_PIXEL_ID = "910648428703706";
+const META_PIXEL_PAGES = new Set(["/", "/about-dr-kulwant-yadav", "/clinic-bhiwadi", "/research"]);
 
 declare global {
   interface Window {
@@ -14,6 +15,7 @@ declare global {
 
 export default function MetaPixel() {
   const pathname = usePathname();
+  const trackPage = META_PIXEL_PAGES.has(pathname);
   const firstPageView = useRef(true);
 
   useEffect(() => {
@@ -23,7 +25,8 @@ export default function MetaPixel() {
       window.location.replace(`/admin/setup-password${window.location.search}${window.location.hash}`);
       return;
     }
-    // The base script records the first view. Next.js route changes need to be
+    if (!trackPage) return;
+    // The base script records the first eligible view. Next.js route changes need to be
     // recorded separately because they do not reload the document.
     if (firstPageView.current) {
       firstPageView.current = false;
@@ -31,7 +34,9 @@ export default function MetaPixel() {
     }
 
     window.fbq?.("track", "PageView");
-  }, [pathname]);
+  }, [pathname, trackPage]);
+
+  if (!trackPage) return null;
 
   return (
     <>

@@ -21,13 +21,6 @@ export default function ThyroidInteractions() {
   const openerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    let attempts = 0;
-    const viewContentTimer = window.setInterval(() => {
-      if (window.fbq) {
-        window.fbq("track", "ViewContent", { content_name: "Thyroid Screening Bhiwadi" });
-        window.clearInterval(viewContentTimer);
-      } else if (++attempts >= 25) window.clearInterval(viewContentTimer);
-    }, 200);
     function handleClick(event: MouseEvent) {
       const target = event.target as HTMLElement;
       const register = target.closest<HTMLElement>("[data-thyroid-register]");
@@ -42,7 +35,6 @@ export default function ThyroidInteractions() {
       if (!link) return;
       const href = link.getAttribute("href") || "";
       if (link.dataset.thyroidTrack === "whatsapp" || href.startsWith("https://wa.me/")) {
-        window.fbq?.("track", "Contact", { content_name: "Thyroid Screening Bhiwadi" });
         ga("whatsapp_click");
       }
       if (link.dataset.thyroidTrack === "phone" || href.startsWith("tel:")) ga("phone_click");
@@ -50,7 +42,6 @@ export default function ThyroidInteractions() {
     }
     document.addEventListener("click", handleClick);
     return () => {
-      window.clearInterval(viewContentTimer);
       document.removeEventListener("click", handleClick);
     };
   }, []);
@@ -101,7 +92,6 @@ export default function ThyroidInteractions() {
       form.reset();
       setStep("success");
       if (result.accepted) {
-        window.fbq?.("track", "Lead", { content_name: "Thyroid Screening Bhiwadi" });
         ga("registration_success");
       }
     } catch (reason) {
