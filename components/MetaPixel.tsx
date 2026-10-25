@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
+import { META_PIXEL_ID } from "@/lib/camps/meta-tracking";
 
-const META_PIXEL_ID = "910648428703706";
 const META_PIXEL_PAGES = new Set(["/", "/about-dr-kulwant-yadav", "/clinic-bhiwadi", "/research"]);
 
 declare global {
@@ -15,7 +15,7 @@ declare global {
 
 export default function MetaPixel() {
   const pathname = usePathname();
-  const trackPage = META_PIXEL_PAGES.has(pathname);
+  const trackPage = META_PIXEL_PAGES.has(pathname) || pathname === "/camps" || pathname.startsWith("/camps/");
   const firstPageView = useRef(true);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ export default function MetaPixel() {
             }(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
+            fbq('set', 'autoConfig', false, '${META_PIXEL_ID}');
             fbq('init', '${META_PIXEL_ID}');
             fbq('track', 'PageView');
           `,

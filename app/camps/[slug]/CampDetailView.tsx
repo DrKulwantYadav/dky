@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { CampApiError, CampAvailabilityResponse, CampBookingConfirmation, CampBookingRequest, CampBookingSuccess, CampDetail, CampDetailResponse, CampSession } from "@/lib/camps/contracts";
 import { campDate, campTime } from "@/lib/camps/format";
+import { trackCampRegisterClick, trackCampRegistrationConfirmed } from "@/lib/camps/meta-tracking";
 
 type ViewState = "loading" | "ready" | "missing" | "error";
 type SubmitState = "idle" | "submitting" | "failed" | "uncertain";
@@ -97,6 +98,7 @@ export default function CampDetailView({ slug }: { slug: string }) {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!camp || inFlight.current || !sessionId || !slotId || !consent) return;
+    if (!pending.current) trackCampRegisterClick();
     inFlight.current = true;
     setSubmitState("submitting");
     setSubmitError("");
@@ -134,6 +136,7 @@ export default function CampDetailView({ slug }: { slug: string }) {
         pending.current = null;
         sessionStorage.removeItem(pendingStorageKey);
         setConfirmation(result.confirmation);
+        trackCampRegistrationConfirmed();
         return;
       }
       const apiError = result as Partial<CampApiError>;
