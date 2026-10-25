@@ -12,11 +12,11 @@ export async function proxy(request: NextRequest) {
       "object-src 'none'",
       "frame-ancestors 'self'",
       "form-action 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline'",
       "font-src 'self' data:",
       "img-src 'self' data: https:",
-      `connect-src 'self'${devSocket}`,
+      `connect-src 'self' https://www.facebook.com${devSocket}`,
     ].join("; "));
     response.headers.set("Referrer-Policy", "no-referrer");
     return response;
