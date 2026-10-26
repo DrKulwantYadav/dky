@@ -117,6 +117,9 @@ summary{font-size:20px}details p{font-size:16px;line-height:1.7}
 .about-hero-photo{min-height:720px;position:relative;overflow:hidden}
 .about-hero-photo:after{content:"";position:absolute;inset:0;box-shadow:inset 30px 0 55px rgba(16,42,67,.08);pointer-events:none}
 .about-hero-photo img{object-position:52% center;transition:transform .7s ease}
+.about-rotarian-badge{position:absolute;z-index:1;left:clamp(20px,3vw,48px);bottom:clamp(20px,3vw,48px);max-width:calc(100% - 40px);padding:16px 22px;background:rgba(16,42,67,.94);border-left:4px solid #d7aa57;box-shadow:0 14px 32px rgba(16,42,67,.18);color:#fff}
+.about-rotarian-badge span{display:block;margin-bottom:4px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f3d7a2}
+.about-rotarian-badge strong{display:block;font-family:var(--font-display);font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.1}
 .about-credentials{gap:10px}.about-credentials span{padding:10px 15px;border-color:#c5c0b4;background:rgba(255,255,255,.72)}
 .profile-section{grid-template-columns:60px minmax(280px,.82fr) minmax(360px,1.18fr);column-gap:clamp(48px,7vw,118px);row-gap:32px;border-bottom:1px solid rgba(16,42,67,.1)}
 .profile-section>div:nth-child(2){max-width:610px}
