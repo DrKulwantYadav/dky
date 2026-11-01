@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import cloudinaryLoader from "@/lib/cloudinary-loader";
 
 export type GalleryItem = { id: string; src: string; full: string; poster: string; alt: string; caption: string; group: string; video: boolean; videoUrl: string };
 
@@ -33,13 +32,13 @@ export default function Gallery({ items }: { items: GalleryItem[] }) {
   const groups = [...new Set(items.map(x => x.group || "Camp highlights"))];
   return <>
     {groups.map(group => <div key={group} className="community-gallery-group"><h3>{group}</h3><div className="community-gallery-grid">{items.map((item, index) => item.group === group || (!item.group && group === "Camp highlights") ? <button type="button" key={item.id} className="community-gallery-tile" onClick={event => { opener.current = event.currentTarget; setActive(index); setPlaying(false); }} aria-label={`Open ${item.video ? "video" : "photo"}: ${item.alt || item.caption || group}`}>
-      {item.poster ? <Image src={item.poster} alt={item.alt || item.caption || group} width={640} height={430} sizes="(max-width: 700px) 100vw, 33vw" loader={item.video || item.poster.startsWith("/") ? undefined : cloudinaryLoader} unoptimized={item.video} loading="lazy"/> : <span className="community-video-placeholder">Video</span>}
+      {item.poster ? <Image src={item.poster} alt={item.alt || item.caption || group} width={640} height={430} sizes="(max-width: 700px) 100vw, 33vw" unoptimized loading="lazy"/> : <span className="community-video-placeholder">Video</span>}
       {item.video && <span className="community-play" aria-hidden="true">▶</span>}{item.caption && <span className="community-gallery-caption">{item.caption}</span>}
     </button> : null)}</div></div>)}
     {active !== null && <div className="community-lightbox" role="dialog" aria-modal="true" aria-label="Camp gallery viewer" onMouseDown={event => { if (event.target === event.currentTarget) { setActive(null); setPlaying(false); } }}>
       <button type="button" className="community-lightbox-close" ref={closeButton} onClick={() => { setActive(null); setPlaying(false); }} aria-label="Close gallery">×</button>
       <button type="button" className="community-lightbox-prev" onClick={() => { setActive((active - 1 + items.length) % items.length); setPlaying(false); }} aria-label="Previous media">‹</button>
-      <figure>{items[active].video ? playing ? <video src={items[active].videoUrl} controls autoPlay playsInline poster={items[active].poster}/> : <button type="button" className="community-video-start" onClick={() => setPlaying(true)}>{items[active].poster && <Image src={items[active].poster} alt={items[active].alt} width={1200} height={800} unoptimized/>}<span>Play video</span></button> : <Image src={items[active].full} alt={items[active].alt || items[active].caption} width={1600} height={1100} sizes="100vw" loader={items[active].full.startsWith("/") ? undefined : cloudinaryLoader}/>}<figcaption>{items[active].caption || items[active].alt}<small>{active + 1} / {items.length}</small></figcaption></figure>
+      <figure>{items[active].video ? playing ? <video src={items[active].videoUrl} controls autoPlay playsInline poster={items[active].poster}/> : <button type="button" className="community-video-start" onClick={() => setPlaying(true)}>{items[active].poster && <Image src={items[active].poster} alt={items[active].alt} width={1200} height={800} unoptimized/>}<span>Play video</span></button> : <Image src={items[active].full} alt={items[active].alt || items[active].caption} width={1600} height={1100} sizes="100vw" unoptimized/>}<figcaption>{items[active].caption || items[active].alt}<small>{active + 1} / {items.length}</small></figcaption></figure>
       <button type="button" className="community-lightbox-next" onClick={() => { setActive((active + 1) % items.length); setPlaying(false); }} aria-label="Next media">›</button>
     </div>}
   </>;

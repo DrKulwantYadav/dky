@@ -23,7 +23,7 @@ export default async function CommunityPage() {
     const cover = detail?.media.find(m => m.id === x.cover_media_id) || detail?.media.find(m => m.is_cover && m.resource_type === "image");
     return { id: x.id, title: x.title, slug: x.slug, summary: x.summary, topic: x.topic, status: x.status,
       date: isStaticInitiative(x) ? x.dateLabel : displayDate(x.start_date, x.end_date), year: isStaticInitiative(x) ? x.yearLabel : x.start_date?.slice(0, 4) || "", venue: x.venue,
-      cover: cover ? cover.public_id.startsWith("static:") ? cover.secure_url : cloudinaryImage(cover.public_id, 760, true) : "", alt: cover?.alt_text || x.title,
+      cover: cover ? cover.public_id.startsWith("static:") ? cover.secure_url : cloudinaryImage(cover.public_id, 760, true, cover.secure_url) : "", alt: cover?.alt_text || x.title,
       registration: x.registration_url || "" };
   });
   return <main className="community-page"><JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Community activities", path: "/community-initiatives" }])}/><CommunityHeader/><section className="community-index-hero"><p className="eyebrow"><span/> Beyond the consultation room</p><h1>Health Camps &amp;<br/><em>Community Activities</em></h1><p>Beyond the consultation room, Dr. Kulwant Yadav’s community initiatives bring health awareness, screening and medical guidance closer to people in Bhiwadi.</p></section><div className="community-index-body"><InitiativeListing items={items}/></div><SiteFooter/></main>;

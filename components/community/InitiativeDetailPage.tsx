@@ -11,7 +11,7 @@ import { breadcrumbSchema, siteUrl } from "@/app/seo";
 
 export default function InitiativeDetailPage({ item, preview = false }: { item: InitiativeDetail; preview?: boolean }) {
   const path = `/community-initiatives/${item.slug}`;
-  const imageUrl = (media: InitiativeMedia, width: number, crop = false) => media.public_id.startsWith("static:") ? media.secure_url : cloudinaryImage(media.public_id, width, crop);
+  const imageUrl = (media: InitiativeMedia, width: number, crop = false) => media.public_id.startsWith("static:") ? media.secure_url : cloudinaryImage(media.public_id, width, crop, media.secure_url);
   const dateLabel = "dateLabel" in item && typeof item.dateLabel === "string" ? item.dateLabel : displayDate(item.start_date, item.end_date);
   const mediaById = new Map(item.media.map(m => [m.id, m]));
   const cover = item.cover_media_id ? mediaById.get(item.cover_media_id) : item.media.find(x => x.is_cover && x.resource_type === "image");

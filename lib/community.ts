@@ -56,11 +56,14 @@ export async function getInitiative(slug: string, includeDraft = false): Promise
   return { ...(item as Initiative), media: (media.data || []) as InitiativeMedia[], services: (services.data || []) as InitiativeService[], statistics: (statistics.data || []) as InitiativeStatistic[], coverage: (coverage.data || []) as InitiativeCoverage[] };
 }
 
-export function cloudinaryImage(publicId: string, width: number, crop = false) {
+export function cloudinaryImage(publicId: string, width: number, crop = false, secureUrl = "") {
   const cloud = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  if (!cloud || !publicId) return "";
+  if (!publicId) return "";
   const transformation = `f_auto,q_auto,w_${width}${crop ? ",h_" + Math.round(width * .67) + ",c_fill,g_auto" : ",c_limit"}`;
-  return `https://res.cloudinary.com/${encodeURIComponent(cloud)}/image/upload/${transformation}/${publicId.split("/").map(encodeURIComponent).join("/")}`;
+  if (cloud) return `https://res.cloudinary.com/${encodeURIComponent(cloud)}/image/upload/${transformation}/${publicId.split("/").map(encodeURIComponent).join("/")}`;
+  return secureUrl.startsWith("https://res.cloudinary.com/")
+    ? secureUrl.replace("/image/upload/", `/image/upload/${transformation}/`)
+    : "";
 }
 
 export function displayDate(start: string | null, end: string | null) {
