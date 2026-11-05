@@ -5,7 +5,7 @@ import SiteFooter from "./SiteFooter";
 import FibroscanCampPopup from "./FibroscanCampPopup";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Internal Medicine Doctor in Bhiwadi",
+  title: "Dr Kulwant Yadav - Internal Medicine Doctor",
   description: "Consult Dr. Kulwant Yadav in Bhiwadi for adult Internal Medicine care, diabetes, hypertension, fatty liver, kidney, respiratory and complex health concerns.",
   path: "/",
 });
