@@ -1,0 +1,6 @@
+.description{display:grid;gap:16px;max-width:840px;margin:24px 0;color:#52636c}
+.paragraph,.highlight{margin:0;font-size:18px;line-height:1.7}
+.highlight{padding:18px 21px;border-left:4px solid var(--teal);background:#e7f2ec;color:#244d49;font-weight:650}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;margin:0;padding:0;list-style:none}
+.list li{padding:12px 14px;border:1px solid #e2eae5;background:#f8fbf8;color:#344952;font-weight:650;line-height:1.45}
+@media(max-width:560px){.paragraph,.highlight{font-size:16px}.list{grid-template-columns:1fr}}

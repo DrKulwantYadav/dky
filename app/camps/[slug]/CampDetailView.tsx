@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import CampDescription from "@/components/camps/CampDescription";
 import type { CampApiError, CampAvailabilityResponse, CampBookingConfirmation, CampBookingRequest, CampBookingSuccess, CampDetail, CampDetailResponse, CampSession } from "@/lib/camps/contracts";
 import { campDate, campTime } from "@/lib/camps/format";
 
@@ -160,7 +161,7 @@ export default function CampDetailView({ slug }: { slug: string }) {
   const locked = submitState === "uncertain" || submitState === "submitting";
   const canBook = submitState === "uncertain" || camp.status === "open";
   return <>
-    <section className="camp-detail-hero"><div><Link className="back-link" href="/camps">← All health camps</Link><p className="eyebrow"><span /> Health camp</p><h1>{camp.title}</h1><p>{camp.description}</p><span className={`camp-status camp-status-${camp.status}`}>{camp.status === "open" ? "Registration open" : camp.status === "upcoming" ? "Registration coming soon" : camp.status === "full" ? "Fully booked" : "Registration closed"}</span></div>{camp.imageUrl && <Image src={camp.imageUrl} alt="" width={900} height={600} unoptimized />}</section>
+    <section className="camp-detail-hero"><div><Link className="back-link" href="/camps">← All health camps</Link><p className="eyebrow"><span /> Health camp</p><h1>{camp.title}</h1><CampDescription description={camp.description} /><span className={`camp-status camp-status-${camp.status}`}>{camp.status === "open" ? "Registration open" : camp.status === "upcoming" ? "Registration coming soon" : camp.status === "full" ? "Fully booked" : "Registration closed"}</span></div>{camp.imageUrl && <Image src={camp.imageUrl} alt="" width={900} height={600} unoptimized />}</section>
     <div className="camp-detail-layout"><section className="camp-information" aria-labelledby="camp-info-title"><h2 id="camp-info-title">Plan your visit</h2><dl><div><dt>Venue</dt><dd>{camp.venueName}<br />{camp.venueAddress}</dd></div><div><dt>Operating hours</dt><dd>{camp.sessions.map(item => <span className="camp-session-line" key={item.id}>{campDate(item.date)} · {campTime(item.opensAt)} – {campTime(item.closesAt)} IST</span>)}</dd></div></dl>{camp.instructions.length > 0 && <><h3>Before you arrive</h3><ul>{camp.instructions.map((instruction, index) => <li key={index}>{instruction}</li>)}</ul></>}<p className="camp-arrival-note">Your chosen time is an arrival window. The token gives your queue position within that window.</p></section>
     <section className="camp-form-panel" id="register" aria-labelledby="camp-form-title"><h2 id="camp-form-title">Register for this camp</h2><p>Register each attendee separately. Family members may use the same contact number; enter the name of the person attending each time.</p>{!canBook ? <div className="camps-state"><p>{camp.status === "full" ? "All available windows are full." : camp.status === "upcoming" ? "Registration has not opened yet." : "Registration is closed for this camp."}</p></div> : <form onSubmit={submit}>
       <label>Patient name <input value={patientName} onChange={event => setPatientName(event.target.value)} autoComplete="name" minLength={2} maxLength={120} placeholder="Name of person attending" disabled={locked} required /></label>

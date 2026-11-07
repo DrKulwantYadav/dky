@@ -7,6 +7,7 @@ import type { AdminRole } from "@/lib/admin/auth";
 const navigation = [
   ["Dashboard", "/admin", LayoutDashboard],
   ["Free Camp Registrations", "/admin/free-camp-registrations", HeartPulse],
+  ["Diabetes Risk Requests", "/admin/diabetes-risk-leads", HeartPulse],
   ["Regular Registrations", "/admin/regular-registrations", Stethoscope],
   ["Appointment Slots", "/admin/appointment-slots", Clock3],
   ["Patients", "/admin/patients", Users],
