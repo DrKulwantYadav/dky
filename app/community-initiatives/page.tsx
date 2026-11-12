@@ -6,12 +6,22 @@ import JsonLd from "@/app/JsonLd";
 import SiteFooter from "@/app/SiteFooter";
 import CommunityHeader from "@/components/community/CommunityHeader";
 import InitiativeListing from "@/components/community/InitiativeListing";
+import type { CampSummary } from "@/lib/camps/contracts";
+import { campDatabase } from "@/lib/camps/server";
 import "./community.css";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = pageMetadata({ title: "Health Camps & Community Activities", description: "Explore Dr. Kulwant Yadav's health camps, screening initiatives and community activities in Bhiwadi.", path: "/community-initiatives" });
 
 export default async function CommunityPage() {
+  let camps: CampSummary[] = [];
+  const campDb = campDatabase();
+  if (campDb) {
+    try {
+      const { data, error } = await campDb.rpc("list_public_camps");
+      if (!error && Array.isArray(data)) camps = (data as CampSummary[]).filter(camp => camp.status === "open" || camp.status === "full");
+    } catch { /* Community history remains available if camp listing fails. */ }
+  }
   let initiatives = [] as Awaited<ReturnType<typeof listInitiatives>>;
   try { initiatives = (await listInitiatives()).filter(x => x.status === "Upcoming" || x.status === "Completed"); }
   catch { /* Static community content remains available without Supabase. */ }
@@ -26,5 +36,5 @@ export default async function CommunityPage() {
       cover: cover ? cover.public_id.startsWith("static:") ? cover.secure_url : cloudinaryImage(cover.public_id, 760, true, cover.secure_url) : "", alt: cover?.alt_text || x.title,
       registration: x.registration_url || "" };
   });
-  return <main className="community-page"><JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Community activities", path: "/community-initiatives" }])}/><CommunityHeader/><section className="community-index-hero"><p className="eyebrow"><span/> Beyond the consultation room</p><h1>Health Camps &amp;<br/><em>Community Activities</em></h1><p>Beyond the consultation room, Dr. Kulwant Yadav’s community initiatives bring health awareness, screening and medical guidance closer to people in Bhiwadi.</p></section><div className="community-index-body"><InitiativeListing items={items}/></div><SiteFooter/></main>;
+  return <main className="community-page"><JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Community activities", path: "/community-initiatives" }])}/><CommunityHeader/><section className="community-index-hero"><p className="eyebrow"><span/> Beyond the consultation room</p><h1>Health Camps &amp;<br/><em>Community Activities</em></h1><p>Beyond the consultation room, Dr. Kulwant Yadav’s community initiatives bring health awareness, screening and medical guidance closer to people in Bhiwadi.</p></section><div className="community-index-body"><InitiativeListing items={items} camps={camps}/></div><SiteFooter/></main>;
 }
