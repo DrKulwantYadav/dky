@@ -4,7 +4,7 @@ The diabetes page opens the eight-question assessment at `/conditions/diabetes?a
 
 Active, authorised staff can view saved submissions at `/admin/diabetes-risk-leads`. The page shows the total from the database, 25 submissions per page, names, contacts, scores, risk tiers and submission times. Anonymous visitors cannot read those records. The public response contains only the score and tier for the request just submitted; it never returns a list of visitors or their contact details.
 
-**Email reports are disabled.** No submission creates an email job or calls Resend, QStash, or a report delivery worker. The email template, optional migration and worker implementation remain in the repository for a later phase. Both worker routes return HTTP 410 while disabled. Do not apply the email migration merely to enable the present assessment.
+**Email reports are disabled.** No submission creates an email job or calls Gmail, QStash, or a report delivery worker. The email template, optional migration and worker implementation remain in the repository for a later phase. Both worker routes return HTTP 410 while disabled. Do not apply the email migration merely to enable the present assessment.
 
 ## Required Supabase setup
 
@@ -22,7 +22,7 @@ select to_regprocedure('public.is_active_admin()') as active_admin,
 
 If the FINDRISC tables and rate-limit function are absent and the admin function exists, run the complete [`202611060001_findrisc_leads.sql`](../supabase/migrations/202611060001_findrisc_leads.sql) in the Supabase SQL Editor. This is the **only migration needed now**. If any of these objects already exist, inspect their definitions before applying or adapting the file. The migration has not been run by this code change.
 
-Set `FINDRISC_RATE_LIMIT_SECRET` to a fresh random value of at least 32 characters in the server environment. Keep `SUPABASE_SERVICE_ROLE_KEY` server-side and use the existing `NEXT_PUBLIC_SUPABASE_URL`. Restart the local server or redeploy the target environment after changing environment variables. No Resend or FINDRISC QStash settings are needed while email is disabled.
+Set `FINDRISC_RATE_LIMIT_SECRET` to a fresh random value of at least 32 characters in the server environment. Keep `SUPABASE_SERVICE_ROLE_KEY` server-side and use the existing `NEXT_PUBLIC_SUPABASE_URL`. Restart the local server or redeploy the target environment after changing environment variables. No FINDRISC QStash settings are needed while email is disabled.
 
 The separate [`202611070001_findrisc_email_reports.sql`](../supabase/migrations/202611070001_findrisc_email_reports.sql) is reserved for a future, separately consented email feature. It may already be present in some environments; the current save API deliberately works with or without it and creates no pending email jobs.
 

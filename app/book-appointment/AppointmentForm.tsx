@@ -97,7 +97,7 @@ export default function AppointmentForm() {
     <div className="field-grid">
       <label><span>Patient name *</span><input name="patientName" autoComplete="name" minLength={2} maxLength={120} required placeholder="Full name"/></label>
       <label><span>Mobile number *</span><input name="mobile" type="tel" inputMode="tel" autoComplete="tel" pattern="(?:\+?91[- ]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number" required placeholder="10-digit mobile number"/></label>
-      <label><span>Email <small>Optional</small></span><input name="email" type="email" autoComplete="email" maxLength={254} placeholder="name@example.com"/></label>
+      <label><span>Email <small>Optional — for an appointment reminder if the clinic books your visit</small></span><input name="email" type="email" autoComplete="email" maxLength={254} placeholder="name@example.com"/></label>
       <label><span>Age group *</span><select name="ageGroup" required defaultValue=""><option value="" disabled>Select age group</option><option>18–29 years</option><option>30–44 years</option><option>45–59 years</option><option>60–74 years</option><option>75 years or above</option></select></label>
       <label><span>Patient type *</span><select name="patientType" required defaultValue=""><option value="" disabled>Select patient type</option><option>New patient</option><option>Follow-up patient</option></select></label>
       <label><span>Preferred date *</span><input name="preferredDate" type="date" min={dateBounds.min} max={dateBounds.max} value={preferredDate} onChange={event => loadSlots(event.target.value)} required/></label>

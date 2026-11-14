@@ -2,6 +2,7 @@ import "server-only";
 import { Client } from "@upstash/qstash";
 import { createSupabaseAdmin } from "@/lib/whatsapp/supabase";
 import { renderFindriscReport, type RiskTier } from "./report";
+import { gmailEmailConfig, sendGmailEmail } from "@/lib/email/gmail";
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 type ClaimedReport = { id: string; claimToken: string; name: string; email: string; score: number; tier: RiskTier };
@@ -27,35 +28,19 @@ export async function processFindriscReport(id: string): Promise<ProcessResult> 
     return accepted ? "accepted" as const : retryable ? "pending" as const : "failed" as const;
   };
   if (!job.email || !/^\S+@\S+\.\S+$/.test(job.email)) return finish(false, null, "recipient_missing", false);
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const fromEmail = process.env.FINDRISC_REPORT_FROM_EMAIL?.trim();
-  if (!apiKey || !fromEmail || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(fromEmail))
+  const config = gmailEmailConfig();
+  if (!config)
     return finish(false, null, "provider_not_configured", false);
 
   let report: ReturnType<typeof renderFindriscReport>;
   try { report = renderFindriscReport({ name: job.name, score: job.score, tier: job.tier }); }
   catch { return finish(false, null, "invalid_report", false); }
-  try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST", cache: "no-store", signal: AbortSignal.timeout(8000),
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json",
-        "Idempotency-Key": `findrisc-report/${job.id}` },
-      body: JSON.stringify({ from: `Dr. Kulwant Yadav <${fromEmail}>`, to: [job.email],
-        subject: report.subject, html: report.html, text: report.text }),
-    });
-    if (response.ok) {
-      const payload: unknown = await response.json();
-      const providerId = payload && typeof payload === "object" && "id" in payload && typeof payload.id === "string" ? payload.id : null;
-      return providerId ? finish(true, providerId, null, false) : finish(false, null, "provider_response_uncertain", true);
-    }
-    if (response.status === 429 || response.status >= 500) return finish(false, null, "provider_retryable", true);
-    if (response.status === 409) {
-      const payload: unknown = await response.json().catch(() => null);
-      const concurrent = payload && typeof payload === "object" && "name" in payload && payload.name === "concurrent_idempotent_requests";
-      return finish(false, null, concurrent ? "provider_concurrent" : "provider_conflict", Boolean(concurrent));
-    }
-    return finish(false, null, "provider_rejected", false);
-  } catch { return finish(false, null, "provider_response_uncertain", true); }
+  const result = await sendGmailEmail({ config, from: config.from, to: job.email,
+    subject: report.subject, html: report.html, text: report.text,
+    deliveryKey: `findrisc-report/${job.id}` });
+  // Gmail has no idempotent send. Never automatically requeue an uncertain result.
+  return finish(result.status === "sent", result.providerId, result.errorCode,
+    result.status === "failed");
 }
 
 export async function queueFindriscReport(id: string) {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LayoutDashboard, HeartPulse, Stethoscope, Users, CalendarDays, Bell, ChartNoAxesCombined, Settings, LogOut, Newspaper, Clock3 } from "lucide-react";
+import { LayoutDashboard, HeartPulse, Stethoscope, Users, CalendarDays, Bell, ChartNoAxesCombined, Settings, LogOut, Newspaper, Clock3, Mail } from "lucide-react";
 import type { ReactNode } from "react";
 import { logout } from "@/app/admin/actions";
 import type { AdminRole } from "@/lib/admin/auth";
@@ -22,7 +22,7 @@ export function AdminShell({ children, name, role }: { children: ReactNode; name
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <Link className="admin-logo" href="/admin"><span>KY</span><div>Dr Kulwant Yadav<small>Patient CRM</small></div></Link>
-        <nav>{navigation.map(([label, href, Icon]) => <Link href={href} key={href}><Icon size={18} />{label}</Link>)}{role !== "staff" && <><span className="admin-nav-heading">Content</span><Link href="/admin/community"><Newspaper size={18}/>Community Activity</Link></>}</nav>
+        <nav>{navigation.map(([label, href, Icon]) => <Link href={href} key={href}><Icon size={18} />{label}</Link>)}{role !== "staff" && <><span className="admin-nav-heading">Content</span><Link href="/admin/community"><Newspaper size={18}/>Community Activity</Link><Link href="/admin/marketing-email"><Mail size={18}/>Email campaigns</Link></>}</nav>
         <form action={logout}><button type="submit"><LogOut size={18} />Logout</button></form>
       </aside>
       <div className="admin-main">

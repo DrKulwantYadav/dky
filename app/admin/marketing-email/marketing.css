@@ -1,0 +1,3 @@
+.marketing-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:20px;align-items:start}
+.marketing-layout input{width:100%}
+@media(max-width:800px){.marketing-layout{grid-template-columns:1fr}}
