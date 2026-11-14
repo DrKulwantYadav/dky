@@ -1,12 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { normalizeIndianMobile } from "@/lib/appointment-phone";
 
 const reasons = ["Diabetes", "Blood pressure", "Fatty liver", "Weight management", "Fever or infection", "Respiratory problem", "Digestive problem", "Headache", "Seizure follow-up", "Kidney-related concern", "Report review", "Other medical concern"] as const;
 
 const schema = z.object({
   patientName: z.string().trim().min(2).max(120),
-  mobile: z.string().regex(/^(?:\+?91[-\s]?)?[6-9]\d{9}$/),
+  mobile: z.string().transform(normalizeIndianMobile).pipe(z.string()),
   email: z.union([z.literal(""), z.email().max(254)]),
   ageGroup: z.enum(["18–29 years", "30–44 years", "45–59 years", "60–74 years", "75 years or above"]),
   patientType: z.enum(["New patient", "Follow-up patient"]),
@@ -23,7 +24,14 @@ export async function POST(request: Request) {
     if (origin && new URL(origin).host !== new URL(request.url).host) return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
 
     const parsed = schema.safeParse(await request.json());
-    if (!parsed.success) return NextResponse.json({ error: "Please check all required fields and try again." }, { status: 400 });
+    if (!parsed.success) {
+      const field = parsed.error.issues[0]?.path[0];
+      const error = field === "mobile" ? "Enter a valid 10-digit Indian mobile number. Spaces are fine."
+        : field === "email" ? "Enter a valid email address or leave the email field blank."
+        : field === "slotId" ? "Please select an appointment time again."
+        : "Please check all required fields and try again.";
+      return NextResponse.json({ error }, { status: 400 });
+    }
     const values = parsed.data;
     if (values.website) return NextResponse.json({ ok: true, accepted: false });
 
@@ -35,7 +43,7 @@ export async function POST(request: Request) {
     const { data, error } = await supabase.rpc("book_public_appointment_slot", {
       p_slot_id: values.slotId,
       p_full_name: values.patientName,
-      p_phone: values.mobile.replace(/\D/g, "").replace(/^91(?=[6-9]\d{9}$)/, ""),
+      p_phone: values.mobile,
       p_email: values.email,
       p_age_group: values.ageGroup,
       p_patient_type: values.patientType,
