@@ -53,6 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           "https://www.facebook.com/share/1EDnNWKTW1/",
           "https://www.linkedin.com/in/dr-kulwant-yadav/",
           "https://share.google/NRSnun2Z3rW8XpbU5",
+          "https://orcid.org/0009-0000-7400-9962",
         ],
         areaServed: [
           { "@type": "City", name: "Bhiwadi" },
