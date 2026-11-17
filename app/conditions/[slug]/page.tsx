@@ -6,6 +6,7 @@ import JsonLd from "../../JsonLd";
 import { breadcrumbSchema, medicalWebPageSchema, pageMetadata } from "../../seo";
 import SiteFooter from "../../SiteFooter";
 import DiabetesOverviewPage from "./DiabetesOverviewPage";
+import ObesityOverviewPage from "./ObesityOverviewPage";
 
 export function generateStaticParams(){return Object.keys(conditionProfiles).map(slug=>({slug}));}
 const conditionSeo:Record<string,{title:string;description:string}>={
@@ -28,6 +29,7 @@ const List=({items}:{items:string[]})=><ul>{items.map(item=><li key={item}>{item
 export default async function ConditionPage({params}:{params:Promise<{slug:string}>}) {
   const {slug}=await params;const c=conditionProfiles[slug];if(!c)notFound();
   if(slug==="diabetes")return <DiabetesOverviewPage/>;
+  if(slug==="obesity-weight-management")return <ObesityOverviewPage/>;
   const seo=conditionSeo[slug];
   return <main className="condition-detail">
     <JsonLd data={[medicalWebPageSchema({name:seo?.title||c.title,description:seo?.description||c.short,path:`/conditions/${slug}`,about:c.title}),breadcrumbSchema([{name:"Home",path:"/"},{name:"Conditions",path:"/conditions"},{name:c.title,path:`/conditions/${slug}`}])]} />
