@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import Image from "next/image";
 
 const conditionCards = [
   { slug: "diabetes", image: "/carousel-diabetes.png", category: "Metabolic health", title: "Diabetes and high blood sugar", text: "Diagnosis, monitoring and practical long-term glucose management." },
   { slug: "hypertension", image: "/carousel-hypertension.png", category: "Cardiovascular health", title: "High blood pressure", text: "Risk assessment and treatment planning for healthier blood pressure." },
   { slug: "fatty-liver-masld", image: "/carousel-fatty-liver.png", category: "Liver health", title: "Fatty liver and metabolic health", text: "Whole-person care for MASLD and related metabolic risks." },
   { slug: "ckm-syndrome", image: "/carousel-heart-kidney.png", category: "Connected health", title: "Heart–kidney–metabolic health", text: "Assessment of connected cardiovascular, kidney and metabolic risks." },
-  { slug: "obesity-weight-management", image: "/carousel-weight.png", category: "Weight management", title: "Obesity and weight-related conditions", text: "Medical assessment of weight, health risks and sustainable options." },
+  { slug: "obesity-weight-management", image: "/obesity-weight-management-food-scale.png", category: "Weight management", title: "Obesity and weight-related conditions", text: "Medical assessment of weight, health risks and sustainable options." },
   { slug: "respiratory-infections", image: "/carousel-respiratory.png", category: "Adult medicine", title: "Respiratory and general medical concerns", text: "Assessment of respiratory illness, fever, infections and broader adult medical concerns." },
 ];
 
@@ -51,7 +52,7 @@ export default function ConditionCarousel() {
         {conditionCards.map((condition) => (
           <a className="condition-slide" href={`/conditions/${condition.slug}`} key={condition.slug}>
             <div className={`condition-slide-visual visual-tone-${condition.slug}`} aria-hidden="true">
-              <span><img src={condition.image} alt="" /></span>
+              <span><Image src={condition.image} alt="" width={116} height={116} sizes="116px" /></span>
               <i />
             </div>
             <div className="condition-slide-content">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://drkulwantyadav.com";
+export const siteUrl = "https://www.drkulwantyadav.com";
 export const physicianId = `${siteUrl}/#dr-kulwant-yadav`;
 
 type BreadcrumbItem = {

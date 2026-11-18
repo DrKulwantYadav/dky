@@ -4,8 +4,7 @@ import { libraryTopics } from "./health-library/data";
 import { serviceProfiles } from "./services/data";
 import { createClient } from "@/lib/supabase/server";
 import { staticInitiatives } from "@/lib/community-static";
-
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://drkulwantyadav.com").replace(/\/$/, "");
+import { siteUrl } from "./seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [

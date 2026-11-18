@@ -13,7 +13,7 @@ const display = Source_Serif_4({ variable: "--font-display", subsets: ["latin"],
 const sans = Source_Sans_3({ variable: "--font-sans", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://drkulwantyadav.com"),
+  metadataBase: new URL(siteUrl),
   title: { default: "Dr. Kulwant Yadav | Internal Medicine Doctor in Bhiwadi", template: "%s | Dr. Kulwant Yadav" },
   description: "Consult Dr. Kulwant Yadav, Internal Medicine specialist in Bhiwadi, for diabetes, hypertension, fatty liver, kidney, respiratory, infection and adult medical care.",
   keywords: ["Internal Medicine doctor in Bhiwadi", "Dr Kulwant Yadav", "diabetes doctor Bhiwadi", "hypertension specialist Bhiwadi", "fatty liver treatment Bhiwadi", "general physician Bhiwadi"],
